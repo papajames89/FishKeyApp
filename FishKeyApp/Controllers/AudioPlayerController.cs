@@ -24,7 +24,6 @@ namespace FishKeyApp.Controllers
                 return;
             }
 
-            // here we go!
             try
             {
                 // This is where we are storing local audio files
