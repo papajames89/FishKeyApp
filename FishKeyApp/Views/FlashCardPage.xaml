@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
+             x:Class="FishKeyApp.Views.FlashCardPage"
+             Shell.NavBarIsVisible="False"
+             x:DataType="viewmodel:FlashCardViewModel">
+    
+    <VerticalStackLayout>
+        <Button
+            x:Name="BackBtn"
+            Text="Go Back"
+            SemanticProperties.Hint="Go to previous page button"
+            Command="{Binding GoBackCommand}"
+            HorizontalOptions="Center" />
+        <Button 
+            Text="{Binding CurrentContext.Name}"
+            Opacity="1"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Image
+            x:Name="FlashcardImg"
+            Opacity="1"
+            Source="{Binding ImgUrl}"
+            SemanticProperties.Description="Cute dot net bot waving hi to you!"
+            HeightRequest="200"/>
+        <Button
+            x:Name="SoundBtn"
+            Text="Play sound"
+            SemanticProperties.Hint="Play sound of a flashcard"
+            Command="{Binding PlayAudioCommand}"/>
+        <Button
+            x:Name="FlipBtn"
+            Text="Flip flashcard"
+            Opacity="{Binding FlipBtnOpacity}"
+            x:FieldModifier="Public"
+            SemanticProperties.Hint="Flip the flashcard"
+            Command="{Binding FlipCommand}"/>
+        <Button
+            x:Name="YesBtn"
+            Text="YES"
+            Opacity="{Binding YesBtnOpacity}"
+            SemanticProperties.Hint="I knew flashcard"
+            Command="{Binding YesCommand}"/>
+        <Button
+            x:Name="NoBtn"
+            Text="NO"
+            Opacity="{Binding NoBtnOpacity}"
+            SemanticProperties.Hint="I didn't knew flashcard"
+            Command="{Binding NoCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

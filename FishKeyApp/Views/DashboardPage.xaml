@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
+             x:Class="FishKeyApp.Views.DashboardPage"
+             Shell.NavBarIsVisible="False"
+             x:Name="Page">
+
+    <VerticalStackLayout
+            Spacing="25"
+            Padding="30,0"
+            VerticalOptions="Center">
+
+        <Button
+                x:Name="LogOutBtn"
+                Text="Log Out"
+                SemanticProperties.Hint="Log Out to Welcome Page"
+                HorizontalOptions="Center"
+                Command="{Binding LogOutCommand}"/>
+
+        <RefreshView
+            IsEnabled="false">
+            <CollectionView
+            x:Name="CategoryCollection"
+            ItemsSource="{Binding Categories}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1"
+                                Text="{Binding Category}"
+                                CommandParameter="{Binding Category}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToFlashCardPageCommand}"/>
+                            <Label Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Image}"
+                                FontAttributes="Italic"
+                                VerticalOptions="End"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+
+    </VerticalStackLayout>
+</ContentPage>

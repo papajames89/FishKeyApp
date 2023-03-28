@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
+             xmlns:model="clr-namespace:FishKeyApp.Models"
+             x:Class="FishKeyApp.Views.SelectUserPage"
+             x:Name="Page"
+             Shell.NavBarIsVisible="False">
+
+    <VerticalStackLayout>
+        <Button
+                x:Name="BackBtn"
+                Text="Go Back"
+                SemanticProperties.Hint="Go to previous page button"
+                Command="{Binding GoBackCommand}"
+                HorizontalOptions="Center" />
+        <RefreshView
+            IsEnabled="false">
+            <CollectionView
+            x:Name="CollectionViewTest"
+            ItemsSource="{Binding ListOfUsers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1"
+                                Text="{Binding Name}"
+                                CommandParameter="{Binding Name}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}"/>
+                            <Label Grid.Row="1"
+                                Grid.Column="1"
+                                Text="{Binding Color}"
+                                FontAttributes="Italic"
+                                VerticalOptions="End"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </VerticalStackLayout>
+</ContentPage>
