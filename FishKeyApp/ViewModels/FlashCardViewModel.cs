@@ -3,8 +3,6 @@ using CommunityToolkit.Mvvm.Input;
 using FishKeyApp.Models;
 using Plugin.Maui.Audio;
 using FishKeyApp.Controllers;
-using Android.Media;
-using Java.Net;
 
 namespace FishKeyApp.ViewModels
 {
