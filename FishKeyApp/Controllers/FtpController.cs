@@ -1,5 +1,4 @@
-﻿using Android.Net;
-using System.Net;
+﻿using System.Net;
 
 namespace FishKeyApp.Controllers
 {

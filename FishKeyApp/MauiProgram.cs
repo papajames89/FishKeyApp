@@ -1,4 +1,6 @@
-﻿using FishKeyApp.ViewModels;
+﻿using FishKeyApp.Controls;
+using FishKeyApp.Platforms.Android;
+using FishKeyApp.ViewModels;
 using FishKeyApp.Views;
 using Microsoft.Extensions.Logging;
 using Plugin.Maui.Audio;
@@ -17,6 +19,14 @@ namespace FishKeyApp
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                     fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
+
+            Microsoft.Maui.Handlers.ElementHandler.ElementMapper.AppendToMapping("Classic", (handler, view) =>
+            {
+                if (view is CustomEntry)
+                {
+                    EntryMapper.Map(handler, view);
+                }
+            });
 
             builder.Services.AddSingleton<WelcomePage>();
             builder.Services.AddSingleton<CreateUserPage>();

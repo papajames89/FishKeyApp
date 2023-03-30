@@ -2,16 +2,64 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
+             xmlns:controls="clr-namespace:FishKeyApp.Controls"
              x:Class="FishKeyApp.Views.CreateUserPage"
-             x:DataType="viewmodel:CreateUserViewModel"
+             x:Name="Page"
              Shell.NavBarIsVisible="False">
-    
+
     <VerticalStackLayout>
-        <Button
-                x:Name="BackBtn"
+        <Button x:Name="BackBtn"
                 Text="Go Back"
                 SemanticProperties.Hint="Go to previous page button"
                 Command="{Binding GoBackCommand}"
+                HorizontalOptions="Center" />
+        <Border StrokeShape="RoundRectangle 10,10"
+                StrokeThickness="2"
+                BackgroundColor="Transparent"
+                Margin="30,10">
+            <controls:CustomEntry Text="{Binding UserName}"
+                                  Placeholder="Username"
+                                  FontSize="Micro"
+                                  Padding="10,10,10,10"
+                                  BackgroundColor="Transparent"
+                                  TextColor="Black"
+                                  VerticalOptions="Center"
+                                  HorizontalOptions="CenterAndExpand" />
+        </Border>
+        <ActivityIndicator IsRunning="True"
+                           Color="LightGrey" />
+        <Button x:Name="CreateUserBtn"
+                Text="Create"
+                SemanticProperties.Hint="After click, creates user"
+                Command="{Binding CreateUserCommand}"
+                HorizontalOptions="Center" />
+        <CollectionView x:Name="UsersList"
+                        ItemsSource="{Binding ListOfUsers}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="UserNameBtn"
+                                Grid.Column="0"
+                                Text="{Binding Name}"
+                                CommandParameter="{Binding Name}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}"/>
+                        <Button x:Name="DeleteUserBtn"
+                                Grid.Column="2"
+                                Text="Delete"
+                                CommandParameter="{Binding Name}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveUserCommand}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button x:Name="RemoveAllUsersBtn"
+                Text="Remove All Users"
+                SemanticProperties.Hint="After click, all users are removed"
+                Command="{Binding RemoveAllUsersCommand}"
                 HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>
