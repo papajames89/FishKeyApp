@@ -48,6 +48,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\CardCategories\a1.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\CardCategories\a1.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
 		<PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
 		<PackageReference Include="FireSharp.Serialization.JsonNet" Version="1.1.0" />
@@ -78,10 +86,6 @@
 	  <MauiXaml Update="Views\SelectUserPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Resources\CardCategories\" />
 	</ItemGroup>
 
 </Project>
