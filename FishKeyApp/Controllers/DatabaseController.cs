@@ -1,5 +1,5 @@
-﻿using Bumptech.Glide.Load.Engine;
-using FishKeyApp.Models;
+﻿using FishKeyApp.Models;
+using FishKeyApp.Views;
 using Newtonsoft.Json;
 
 namespace FishKeyApp.Controllers
@@ -7,16 +7,26 @@ namespace FishKeyApp.Controllers
     public class DatabaseController
     {
         private readonly string _dataDir = FileSystem.Current.AppDataDirectory;
+        private const int MaxUsers = 10;
         private const string Extension = ".json";
+        private const string Ok = "Ok";
+        private const string UserExistAlert = "Wprowadzona nazwa użytwonika już istnieje, podaj inną nazwę użytkownika";
+        private const string ToManyUsersAlert = "Zbyt duża liczba użytkowników.Aby utworzyć kolejnego użytkownika, usuń jednego z instniejących.";
+        private const string Alert = "Uwaga";
 
-        public void CreateDatabase(string name)
+        public Task CreateDatabase(string name)
         {
+            var totalUsers = Directory.GetFiles(_dataDir, "*.json").ToList().Count();
             var fileName = $"{name}{Extension}";
             var localPath = Path.Combine(_dataDir, fileName);
 
             if (File.Exists(localPath) || string.IsNullOrEmpty(name))
             {
-                return;
+                return Application.Current.MainPage.DisplayAlert(Alert, UserExistAlert, Ok);
+            }
+            else if (totalUsers >= MaxUsers)
+            {
+                return Application.Current.MainPage.DisplayAlert(Alert, ToManyUsersAlert, Ok);
             }
 
             var user = new UserModel()
@@ -28,7 +38,9 @@ namespace FishKeyApp.Controllers
 
             string jsonString = JsonConvert.SerializeObject(user);
 
-           File.WriteAllText(localPath, jsonString);
+            File.WriteAllText(localPath, jsonString);
+
+            return Shell.Current.GoToAsync($"{nameof(DashboardPage)}?User={name}");
         }
 
         public List<UserModel> GetListOfUsers()

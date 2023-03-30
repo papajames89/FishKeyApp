@@ -33,29 +33,6 @@
                 SemanticProperties.Hint="After click, creates user"
                 Command="{Binding CreateUserCommand}"
                 HorizontalOptions="Center" />
-        <CollectionView x:Name="UsersList"
-                        ItemsSource="{Binding ListOfUsers}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="UserNameBtn"
-                                Grid.Column="0"
-                                Text="{Binding Name}"
-                                CommandParameter="{Binding Name}"
-                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}"/>
-                        <Button x:Name="DeleteUserBtn"
-                                Grid.Column="2"
-                                Text="Delete"
-                                CommandParameter="{Binding Name}"
-                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveUserCommand}" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
         <Button x:Name="RemoveAllUsersBtn"
                 Text="Remove All Users"
                 SemanticProperties.Hint="After click, all users are removed"

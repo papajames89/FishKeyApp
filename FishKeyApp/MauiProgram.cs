@@ -28,15 +28,15 @@ namespace FishKeyApp
                 }
             });
 
-            builder.Services.AddSingleton<WelcomePage>();
+            builder.Services.AddTransient<WelcomePage>();
             builder.Services.AddSingleton<CreateUserPage>();
-            builder.Services.AddSingleton<SelectUserPage>();
+            builder.Services.AddTransient<SelectUserPage>();
             builder.Services.AddSingleton<DashboardPage>();
             builder.Services.AddSingleton<FlashCardPage>();
 
-            builder.Services.AddSingleton<WelcomeViewModel>();
+            builder.Services.AddTransient<WelcomeViewModel>();
             builder.Services.AddSingleton<CreateUserViewModel>();
-            builder.Services.AddSingleton<SelectUserViewModel>();
+            builder.Services.AddTransient<SelectUserViewModel>();
             builder.Services.AddSingleton<DashboardViewModel>();
             builder.Services.AddSingleton<FlashCardViewModel>();
 

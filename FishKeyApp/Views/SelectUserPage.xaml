@@ -8,38 +8,46 @@
              Shell.NavBarIsVisible="False">
 
     <VerticalStackLayout>
-        <Button
-                x:Name="BackBtn"
+        <Button x:Name="BackBtn"
                 Text="Go Back"
                 SemanticProperties.Hint="Go to previous page button"
                 Command="{Binding GoBackCommand}"
                 HorizontalOptions="Center" />
-        <RefreshView
-            IsEnabled="false">
-            <CollectionView
-            x:Name="CollectionViewTest"
-            ItemsSource="{Binding ListOfUsers}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Button
-                                Grid.Column="1"
+
+        <CollectionView x:Name="UsersList"
+                        ItemsSource="{Binding ListOfUsers}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button x:Name="UserNameBtn"
+                                Grid.Column="0"
                                 Text="{Binding Name}"
+                                CornerRadius="15"
+                                WidthRequest="250"
+                                BackgroundColor="DarkOrange"
                                 CommandParameter="{Binding Name}"
-                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}"/>
-                            <Label Grid.Row="1"
-                                Grid.Column="1"
-                                Text="{Binding Color}"
-                                FontAttributes="Italic"
-                                VerticalOptions="End"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}" />
+                        <Button x:Name="DeleteUserBtn"
+                                Grid.Column="2"
+                                Text="Delete"
+                                HorizontalOptions="End"
+                                WidthRequest="60"
+                                Padding="0"
+                                CornerRadius="30"
+                                BackgroundColor="LightSeaGreen"
+                                CommandParameter="{Binding Name}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveUserCommand}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        <Button x:Name="RemoveAllUsersBtn2"
+                Text="Remove All Users"
+                Command="{Binding RemoveAllUsersCommand}"
+                HorizontalOptions="Center" />
     </VerticalStackLayout>
 </ContentPage>

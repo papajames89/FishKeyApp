@@ -1,4 +1,7 @@
-﻿using FishKeyApp.Views;
+﻿using Android.OS.Strictmode;
+using FishKeyApp.ViewModels;
+using FishKeyApp.Views;
+using Java.Security;
 
 namespace FishKeyApp
 {

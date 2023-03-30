@@ -7,14 +7,12 @@ using FishKeyApp.Views;
 namespace FishKeyApp.ViewModels
 {
     [QueryProperty(nameof(UserName), nameof(UserName))]
-    [QueryProperty(nameof(ListOfUsers), nameof(ListOfUsers))]
     public partial class CreateUserViewModel : ObservableObject
     {
         private readonly DatabaseController _databaseController;
         public CreateUserViewModel()
         {
             _databaseController = new DatabaseController();
-            ListOfUsers = _databaseController.GetListOfUsers();
             var test = FileSystem.Current.AppDataDirectory;
         }
         [RelayCommand]
@@ -29,7 +27,6 @@ namespace FishKeyApp.ViewModels
         public void CreateUser()
         {
             _databaseController.CreateDatabase(UserName);
-            ListOfUsers = _databaseController.GetListOfUsers();
             UserName = string.Empty;
         }
 
@@ -37,14 +34,6 @@ namespace FishKeyApp.ViewModels
         public void RemoveAllUsers()
         {
             _databaseController.RemoveAllUsers();
-            ListOfUsers = _databaseController.GetListOfUsers();
-        }
-
-        [RelayCommand]
-        public void RemoveUser(string user)
-        {
-            _databaseController.RemoveUser(user);
-            ListOfUsers = _databaseController.GetListOfUsers();
         }
 
         [RelayCommand]
@@ -52,8 +41,5 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         private string userName;
-
-        [ObservableProperty]
-        private List<UserModel> listOfUsers;
     }
 }
