@@ -1,6 +1,9 @@
-﻿using FishKeyApp.Models;
+﻿using Bumptech.Glide.Load.Engine;
+using FishKeyApp.Models;
 using FishKeyApp.Views;
 using Newtonsoft.Json;
+using Org.Json;
+using static Java.Util.Jar.Attributes;
 
 namespace FishKeyApp.Controllers
 {
@@ -56,12 +59,36 @@ namespace FishKeyApp.Controllers
 
         public UserModel GetUser(string name)
         {
-            var userPath = Directory.GetFiles(_dataDir, "*.json")
-                .Where(path => Path.GetFileName(path)
-                .Equals(name, StringComparison.OrdinalIgnoreCase))
-                .First();
+            var userPath = Directory.GetFiles(_dataDir, "*.json");
+            foreach (var path in userPath)
+            {
+                if (path.Contains(name))
+                {
+                    return JsonConvert.DeserializeObject<UserModel>(File.ReadAllText(path));
+                }
+            }
 
-            return JsonConvert.DeserializeObject<UserModel>(userPath);
+            return new UserModel();
+        }
+
+        public UserModel UpdateUser(UserModel user, FlashCardModel card)
+        {
+            bool test = user.KnownCards.Contains(card);
+            if (user.KnownCards.Contains(card))
+            {
+                return user;
+            }
+            user.KnownCards.Add(card);
+            return user;
+        }
+
+        public void SaveUser(UserModel user)
+        {
+            var fileName = $"{user.Name}{Extension}";
+            var localPath = Path.Combine(_dataDir, fileName);
+            var serializedUser = JsonConvert.SerializeObject(user);
+
+            File.WriteAllText(localPath, serializedUser);
         }
 
         public void RemoveUser(string name)

@@ -19,17 +19,38 @@ namespace FishKeyApp.Controllers
             }
         }
 
-        public void SelectedCategory(string category)
+        public List<FlashCardModel> SelectedCategory(string category)
         {
             switch (category)
             {
                 case "A1":
-                    GetCategory("a1");
-                    break;
-                case "A2":
-                    GetCategory("a2");
-                    break;
+                    return GetCategory("a1");
+                case "Kategoria testowa":
+                    return GetCategory("Kategoria testowa");
+                default:
+                    return GetCategory("a1");
             }
+        }
+
+        public FlashCardModel GetRandomFlashCard(UserModel user, string category)
+        {
+            var flashcards = SelectedCategory(category);
+            var uniqueCards = flashcards.Except(user.KnownCards).ToList();
+            if (uniqueCards.Count > 0)
+            {
+                Random rnd = new Random();
+                int index = rnd.Next(uniqueCards.Count);
+
+                return uniqueCards[index];
+            }
+            else return new FlashCardModel()
+            {
+                Polish = "Gratulacje, poznałeś wszystkie hasła w tej kategorii",
+                English = "Congratulations, you have learned all the entries in this category",
+                ImgUrl = "congratulations.jpg",
+                Mp3Url = string.Empty,
+                Category = string.Empty
+            };
         }
     }
 }

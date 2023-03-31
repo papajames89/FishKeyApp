@@ -8,40 +8,51 @@ namespace FishKeyApp.ViewModels
 {
     [QueryProperty(nameof(Category), nameof(Category))]
     [QueryProperty(nameof(ImgUrl), nameof(ImgUrl))]
+    [QueryProperty(nameof(CardLabel), nameof(CardLabel))]
     [QueryProperty(nameof(CurrentContext), nameof(CurrentContext))]
-    [QueryProperty(nameof(UserModel), nameof(UserModel))]
+    [QueryProperty(nameof(CurrentUser), nameof(CurrentUser))]
+    [QueryProperty(nameof(CurrentFlashCard), nameof(CurrentFlashCard))]
     [QueryProperty(nameof(FlipBtnOpacity), nameof(FlipBtnOpacity))]
-    [QueryProperty(nameof(YesBtnOpacity), nameof(YesBtnOpacity))]
-    [QueryProperty(nameof(NoBtnOpacity), nameof(NoBtnOpacity))]
+    [QueryProperty(nameof(ResultBtnsOpacity), nameof(ResultBtnsOpacity))]
 
     public partial class FlashCardViewModel : ObservableObject
     {
         private readonly FtpController _ftpController;
         private readonly AudioPlayerController _audioPlayerController;
         private readonly DatabaseController _databaseController;
+        private readonly CardCategoryController _cardCategoryController;
+        private bool _isFlipped = false;
 
         public FlashCardViewModel(IAudioManager audioManager)
         {
             _audioPlayerController = new AudioPlayerController(audioManager);
             _databaseController = new DatabaseController();
-            var test -CurrentContext;
-            //UserModel = _databaseController.GetUser(CurrentContext.Name);
+            _cardCategoryController = new CardCategoryController();
             _ftpController = new FtpController();
-            FlipBtnOpacity = 1;
-            YesBtnOpacity = 0;
-            NoBtnOpacity = 0;
-            SetUp();
         }
 
-        private void SetUp()
+        public Task InitAsync()
         {
-            ImgUrl = _ftpController.DownloadImgFile("back.jpg");
+            CurrentUser = _databaseController.GetUser(CurrentContext.Name);
+            CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
+            ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
+            CardLabel = CurrentFlashCard.Polish;
+            FlipBtnOpacity = 1;
+            ResultBtnsOpacity = 0;
+            return Task.CompletedTask;
+        }
+
+        private void UpdateCurrentCard()
+        {
+            CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
+            ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
+            CardLabel = CurrentFlashCard.Polish;
         }
 
         [RelayCommand]
         private void PlayAudio()
         {
-            _audioPlayerController.PlayAudio("hair.mp3");
+            _audioPlayerController.PlayAudio(CurrentFlashCard.Mp3Url);
         }
 
         [RelayCommand]
@@ -50,10 +61,14 @@ namespace FishKeyApp.ViewModels
         [RelayCommand]
         void Flip()
         {
+            if (CardLabel == CurrentFlashCard.Polish)
+            {
+                CardLabel = CurrentFlashCard.English;
+            }
+
             if (FlipBtnOpacity == 1)
             {
-                YesBtnOpacity = 1;
-                NoBtnOpacity = 1;
+                ResultBtnsOpacity = 1;
                 FlipBtnOpacity = 0;
             }
             else return;
@@ -62,10 +77,12 @@ namespace FishKeyApp.ViewModels
         [RelayCommand]
         void Yes()
         {
-            if (YesBtnOpacity == 1)
+            CurrentUser = _databaseController.UpdateUser(CurrentUser, CurrentFlashCard);
+            _databaseController.SaveUser(CurrentUser);
+            UpdateCurrentCard();
+            if (ResultBtnsOpacity == 1)
             {
-                YesBtnOpacity = 0;
-                NoBtnOpacity = 0;
+                ResultBtnsOpacity = 0;
                 FlipBtnOpacity = 1;
             }
             else return;
@@ -74,10 +91,10 @@ namespace FishKeyApp.ViewModels
         [RelayCommand]
         void No()
         {
-            if (NoBtnOpacity == 1)
+            UpdateCurrentCard();
+            if (ResultBtnsOpacity == 1)
             {
-                YesBtnOpacity = 0;
-                NoBtnOpacity = 0;
+                ResultBtnsOpacity = 0;
                 FlipBtnOpacity = 1;
             }
             else return;
@@ -90,18 +107,21 @@ namespace FishKeyApp.ViewModels
         string category;
 
         [ObservableProperty]
+        string cardLabel;
+
+        [ObservableProperty]
         int flipBtnOpacity;
 
         [ObservableProperty]
-        int yesBtnOpacity;
-
-        [ObservableProperty]
-        int noBtnOpacity;
+        int resultBtnsOpacity;
 
         [ObservableProperty]
         CurrentContextModel currentContext;
 
         [ObservableProperty]
-        UserModel userModel;
+        UserModel currentUser;
+
+        [ObservableProperty]
+        FlashCardModel currentFlashCard;
     }
 }

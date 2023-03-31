@@ -18,12 +18,12 @@ namespace FishKeyApp.Controllers
         }
         public void PlayAudio(string fileName)
         {
-            // ignore if we're already playing
-            if (mediaState == MediaState.Playing)
-            {
-                StopAudio();
-                return;
-            }
+            //// ignore if we're already playing
+            //if (mediaState == MediaState.Playing)
+            //{
+            //    StopAudio();
+            //    return;
+            //}
 
             try
             {
@@ -47,18 +47,18 @@ namespace FishKeyApp.Controllers
 
                 // start playing
                 player.Play();
-                mediaState= MediaState.Playing;
+                //mediaState= MediaState.Playing;
             }
             catch (Exception e)
             {
             }
         }
 
-        public void StopAudio()
-        {
-            player.Stop();
-            player.Dispose();
-            mediaState = MediaState.Stopped;
-        }
+        //public void StopAudio()
+        //{
+        //    player.Stop();
+        //    player.Dispose();
+        //    mediaState = MediaState.Stopped;
+        //}
     }
 }
