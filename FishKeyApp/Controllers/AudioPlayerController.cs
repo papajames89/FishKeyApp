@@ -13,9 +13,10 @@ namespace FishKeyApp.Controllers
         public AudioPlayerController(IAudioManager audioManager)
         {
             this.audioManager = audioManager;
+            mediaState = MediaState.Stopped;
             _ftpController = new FtpController();
         }
-        public async Task PlayAudio(string fileName)
+        public void PlayAudio(string fileName)
         {
             // ignore if we're already playing
             if (mediaState == MediaState.Playing)
@@ -46,8 +47,7 @@ namespace FishKeyApp.Controllers
 
                 // start playing
                 player.Play();
-                // configure the UI for playing
-                mediaState = MediaState.Playing;
+                mediaState= MediaState.Playing;
             }
             catch (Exception e)
             {
@@ -56,12 +56,9 @@ namespace FishKeyApp.Controllers
 
         public void StopAudio()
         {
-            if (mediaState == MediaState.Playing)
-            {
-                player.Stop();
-                player.Dispose();
-                mediaState = MediaState.Stopped;
-            }
+            player.Stop();
+            player.Dispose();
+            mediaState = MediaState.Stopped;
         }
     }
 }

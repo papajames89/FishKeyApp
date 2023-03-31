@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Android.Webkit;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using FishKeyApp.Controllers;
 using FishKeyApp.Models;
@@ -7,19 +8,20 @@ using FishKeyApp.Views;
 namespace FishKeyApp.ViewModels
 {
     [QueryProperty(nameof(User), nameof(User))]
+    [QueryProperty(nameof(Categories), nameof(Categories))]
     public partial class DashboardViewModel : ObservableObject
     {
-        public List<CategoryModel> Categories { get; set; }
         private CurrentContextModel _currentContextModel;
         public DashboardViewModel()
         {
-            Categories = new List<CategoryModel>
+            categories = new List<string>()
             {
-                new CategoryModel(){ Category = "Category1", Image = "Img1.jpg" },
-                new CategoryModel(){ Category = "Category2", Image = "Img2.jpg" }
+                "A1",
+                "A2"
             };
             _currentContextModel = new CurrentContextModel() { Name = user };
         }
+
 
         [RelayCommand]
         Task LogOut() => Shell.Current.GoToAsync($"../..");
@@ -38,5 +40,8 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         string user;
+
+        [ObservableProperty]
+        public List<string> categories;
     }
 }

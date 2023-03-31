@@ -9,6 +9,7 @@ namespace FishKeyApp.ViewModels
     [QueryProperty(nameof(Category), nameof(Category))]
     [QueryProperty(nameof(ImgUrl), nameof(ImgUrl))]
     [QueryProperty(nameof(CurrentContext), nameof(CurrentContext))]
+    [QueryProperty(nameof(UserModel), nameof(UserModel))]
     [QueryProperty(nameof(FlipBtnOpacity), nameof(FlipBtnOpacity))]
     [QueryProperty(nameof(YesBtnOpacity), nameof(YesBtnOpacity))]
     [QueryProperty(nameof(NoBtnOpacity), nameof(NoBtnOpacity))]
@@ -17,10 +18,14 @@ namespace FishKeyApp.ViewModels
     {
         private readonly FtpController _ftpController;
         private readonly AudioPlayerController _audioPlayerController;
+        private readonly DatabaseController _databaseController;
 
         public FlashCardViewModel(IAudioManager audioManager)
         {
             _audioPlayerController = new AudioPlayerController(audioManager);
+            _databaseController = new DatabaseController();
+            var test -CurrentContext;
+            //UserModel = _databaseController.GetUser(CurrentContext.Name);
             _ftpController = new FtpController();
             FlipBtnOpacity = 1;
             YesBtnOpacity = 0;
@@ -34,7 +39,7 @@ namespace FishKeyApp.ViewModels
         }
 
         [RelayCommand]
-        private async Task PlayAudio()
+        private void PlayAudio()
         {
             _audioPlayerController.PlayAudio("hair.mp3");
         }
@@ -95,5 +100,8 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         CurrentContextModel currentContext;
+
+        [ObservableProperty]
+        UserModel userModel;
     }
 }

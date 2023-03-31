@@ -49,10 +49,12 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\CardCategories\a1.json" />
+	  <None Remove="Resources\CardCategories\a2.json" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\CardCategories\a1.json" />
+	  <EmbeddedResource Include="Resources\CardCategories\a2.json" />
 	</ItemGroup>
 
 	<ItemGroup>

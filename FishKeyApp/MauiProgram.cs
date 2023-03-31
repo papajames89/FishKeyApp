@@ -29,16 +29,16 @@ namespace FishKeyApp
             });
 
             builder.Services.AddTransient<WelcomePage>();
-            builder.Services.AddSingleton<CreateUserPage>();
+            builder.Services.AddTransient<CreateUserPage>();
             builder.Services.AddTransient<SelectUserPage>();
-            builder.Services.AddSingleton<DashboardPage>();
-            builder.Services.AddSingleton<FlashCardPage>();
+            builder.Services.AddTransient<DashboardPage>();
+            builder.Services.AddTransient<FlashCardPage>();
 
             builder.Services.AddTransient<WelcomeViewModel>();
-            builder.Services.AddSingleton<CreateUserViewModel>();
+            builder.Services.AddTransient<CreateUserViewModel>();
             builder.Services.AddTransient<SelectUserViewModel>();
-            builder.Services.AddSingleton<DashboardViewModel>();
-            builder.Services.AddSingleton<FlashCardViewModel>();
+            builder.Services.AddTransient<DashboardViewModel>();
+            builder.Services.AddTransient<FlashCardViewModel>();
 
             builder.Services.AddSingleton(AudioManager.Current);
 

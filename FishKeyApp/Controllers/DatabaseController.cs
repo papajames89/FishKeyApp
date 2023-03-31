@@ -33,7 +33,7 @@ namespace FishKeyApp.Controllers
             {
                 Name = name,
                 Color = $"{name}.jpg",
-                KnownCards= new List<FlashCardModel>()
+                KnownCards = new List<FlashCardModel>()
             };
 
             string jsonString = JsonConvert.SerializeObject(user);
@@ -52,6 +52,16 @@ namespace FishKeyApp.Controllers
                 users.Add(JsonConvert.DeserializeObject<UserModel>(File.ReadAllText(path)));
             }
             return users;
+        }
+
+        public UserModel GetUser(string name)
+        {
+            var userPath = Directory.GetFiles(_dataDir, "*.json")
+                .Where(path => Path.GetFileName(path)
+                .Equals(name, StringComparison.OrdinalIgnoreCase))
+                .First();
+
+            return JsonConvert.DeserializeObject<UserModel>(userPath);
         }
 
         public void RemoveUser(string name)

@@ -6,45 +6,28 @@
              Shell.NavBarIsVisible="False"
              x:Name="Page">
 
-    <VerticalStackLayout
-            Spacing="25"
-            Padding="30,0"
-            VerticalOptions="Center">
+    <VerticalStackLayout>
 
-        <Button
-                x:Name="LogOutBtn"
+        <Button x:Name="LogOutBtn"
                 Text="Log Out"
                 SemanticProperties.Hint="Log Out to Welcome Page"
                 HorizontalOptions="Center"
-                Command="{Binding LogOutCommand}"/>
-
-        <RefreshView
-            IsEnabled="false">
-            <CollectionView
-            x:Name="CategoryCollection"
-            ItemsSource="{Binding Categories}">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Button
-                                Grid.Column="1"
-                                Text="{Binding Category}"
-                                CommandParameter="{Binding Category}"
-                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToFlashCardPageCommand}"/>
-                            <Label Grid.Row="1"
-                                Grid.Column="1"
-                                Text="{Binding Image}"
-                                FontAttributes="Italic"
-                                VerticalOptions="End"/>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </RefreshView>
-
+                Command="{Binding LogOutCommand}" />
+        <CollectionView x:Name="UsersList"
+                        ItemsSource="{Binding Categories}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Padding="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="0"
+                                Text="{Binding .}"
+                                CommandParameter="{Binding .}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToFlashCardPageCommand}" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
 </ContentPage>

@@ -18,5 +18,18 @@ namespace FishKeyApp.Controllers
                 return JsonConvert.DeserializeObject<List<FlashCardModel>>(result);
             }
         }
+
+        public void SelectedCategory(string category)
+        {
+            switch (category)
+            {
+                case "A1":
+                    GetCategory("a1");
+                    break;
+                case "A2":
+                    GetCategory("a2");
+                    break;
+            }
+        }
     }
 }
