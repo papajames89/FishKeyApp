@@ -12,6 +12,7 @@ namespace FishKeyApp.ViewModels
     public partial class DashboardViewModel : ObservableObject
     {
         private CurrentContextModel _currentContextModel;
+        private readonly CardCategoryController _cardCategoryController;
         public DashboardViewModel()
         {
             categories = new List<string>()
@@ -20,11 +21,18 @@ namespace FishKeyApp.ViewModels
                 "Kategoria testowa"
             };
             _currentContextModel = new CurrentContextModel() { Name = user };
+            _cardCategoryController = new CardCategoryController();
         }
 
 
         [RelayCommand]
         Task LogOut() => Shell.Current.GoToAsync($"../..");
+
+        [RelayCommand]
+        public void ResetCategory(string category)
+        {
+            _cardCategoryController.ResetCategoryProgress(user, category);
+        }
 
         [RelayCommand]
         public Task GoToFlashCardPage(string category)

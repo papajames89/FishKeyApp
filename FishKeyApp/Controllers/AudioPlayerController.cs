@@ -18,13 +18,6 @@ namespace FishKeyApp.Controllers
         }
         public void PlayAudio(string fileName)
         {
-            //// ignore if we're already playing
-            //if (mediaState == MediaState.Playing)
-            //{
-            //    StopAudio();
-            //    return;
-            //}
-
             try
             {
                 // This is where we are storing local audio files
@@ -53,12 +46,5 @@ namespace FishKeyApp.Controllers
             {
             }
         }
-
-        //public void StopAudio()
-        //{
-        //    player.Stop();
-        //    player.Dispose();
-        //    mediaState = MediaState.Stopped;
-        //}
     }
 }

@@ -1,9 +1,6 @@
-﻿using Bumptech.Glide.Load.Engine;
-using FishKeyApp.Models;
+﻿using FishKeyApp.Models;
 using FishKeyApp.Views;
 using Newtonsoft.Json;
-using Org.Json;
-using static Java.Util.Jar.Attributes;
 
 namespace FishKeyApp.Controllers
 {

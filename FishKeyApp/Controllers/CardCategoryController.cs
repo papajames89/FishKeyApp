@@ -6,6 +6,14 @@ namespace FishKeyApp.Controllers
 {
     class CardCategoryController
     {
+        private readonly DatabaseController _databaseController;
+        private const string Alert = "Uwaga";
+        private const string CategoryReset = "Kategoria została przywrócona do stanu początkowego";
+        private const string Ok = "Ok";
+        public CardCategoryController()
+        {
+            _databaseController = new DatabaseController();
+        }
         public List<FlashCardModel> GetCategory(string categoryName)
         {
             var assembly = Assembly.GetExecutingAssembly();
@@ -51,6 +59,19 @@ namespace FishKeyApp.Controllers
                 Mp3Url = string.Empty,
                 Category = string.Empty
             };
+        }
+
+        public void ResetCategoryProgress(string userName, string category)
+        {
+            var user = _databaseController.GetUser(userName);
+            if (user.KnownCards.Count == 0)
+            {
+                return; // user has no known cards
+            }
+            user.KnownCards.RemoveAll(card => card.Category.ToLower() == category.ToLower());
+
+            _databaseController.SaveUser(user);
+            Application.Current.MainPage.DisplayAlert(Alert, CategoryReset, Ok);
         }
     }
 }

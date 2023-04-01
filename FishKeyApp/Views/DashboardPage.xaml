@@ -19,12 +19,23 @@
                 <DataTemplate>
                     <Grid Padding="10">
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
                         <Button Grid.Column="0"
                                 Text="{Binding .}"
                                 CommandParameter="{Binding .}"
                                 Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToFlashCardPageCommand}" />
+                        <Button x:Name="ResetCategoryBtn"
+                                Grid.Column="2"
+                                Text="Reset"
+                                HorizontalOptions="End"
+                                WidthRequest="60"
+                                Padding="0"
+                                CornerRadius="30"
+                                BackgroundColor="LightSeaGreen"
+                                CommandParameter="{Binding .}"
+                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.ResetCategoryCommand}" />
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
