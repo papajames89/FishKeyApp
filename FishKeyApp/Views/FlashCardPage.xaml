@@ -7,53 +7,99 @@
              x:DataType="viewmodel:FlashCardViewModel"
              Appearing="Page_Appearing">
 
-    <VerticalStackLayout Padding="10">
-        <Button x:Name="BackBtn"
-                Text="Go Back"
-                SemanticProperties.Hint="Go to previous page button"
-                Command="{Binding GoBackCommand}"
-                HorizontalOptions="Center" />
-        <Image x:Name="FlashcardImg"
-               Opacity="1"
-               Source="{Binding ImgUrl}"
-               SemanticProperties.Description="Cute dot net bot waving hi to you!"
-               HeightRequest="200" />
-        <Label x:Name="CardLabel"
-               HorizontalOptions="Center"
-               Margin="0,5,0,0"
-               Text="{Binding CardLabel}"></Label>
-        <Button x:Name="FlipBtn"
-                Margin="0,5,0,0"
-                Text="Flip flashcard"
-                WidthRequest="150"
-                HorizontalOptions="Center"
-                Opacity="{Binding FlipBtnOpacity}"
-                x:FieldModifier="Public"
-                SemanticProperties.Hint="Flip the flashcard"
-                Command="{Binding FlipCommand}" />
-        <Button x:Name="YesBtn"
-                Margin="0,5,0,0"
-                Text="YES"
-                WidthRequest="150"
-                HorizontalOptions="Center"
-                Opacity="{Binding ResultBtnsOpacity}"
-                SemanticProperties.Hint="I knew flashcard"
-                Command="{Binding YesCommand}" />
-        <Button x:Name="NoBtn"
-                Margin="0,5,0,0"
-                Text="NO"
-                WidthRequest="150"
-                HorizontalOptions="Center"
-                Opacity="{Binding ResultBtnsOpacity}"
-                SemanticProperties.Hint="I didn't knew flashcard"
-                Command="{Binding NoCommand}" />
-        <Button x:Name="SoundBtn"
-                Margin="0,5,0,0"
-                Text="Play sound"
-                WidthRequest="150"
-                HorizontalOptions="Center"
-                Opacity="{Binding ResultBtnsOpacity}"
-                SemanticProperties.Hint="Play sound of a flashcard"
-                Command="{Binding PlayAudioCommand}" />
-    </VerticalStackLayout>
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="1,0"
+                                 EndPoint="0,1">
+                <GradientStop Color="#FED9B7"
+                              Offset="0.4" />
+                <GradientStop Color="#F07167"
+                              Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="10*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="3*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <ImageButton Grid.Row="0"
+            Source="back.png"
+                     HeightRequest="30"
+                     Aspect="AspectFit"
+                     HorizontalOptions="Start"
+                     Opacity="0.7"
+                     Command="{Binding GoBackCommand}" />
+        <VerticalStackLayout Padding="10" VerticalOptions="Center" HorizontalOptions="Center" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3">
+            
+            <Button x:Name="BackBtn"
+                    Text="Go Back"
+                    SemanticProperties.Hint="Go to previous page button"
+                    Command="{Binding GoBackCommand}"
+                    HorizontalOptions="Center" />
+            <Frame CornerRadius="10"
+                   Padding="0"
+                   HeightRequest="300">
+
+                <VerticalStackLayout>
+                    <Image x:Name="FlashcardImg"
+                           Opacity="1"
+                           Margin="0"
+                           Source="{Binding ImgUrl}"
+                           SemanticProperties.Description="Cute dot net bot waving hi to you!"/>
+                    <Label x:Name="CardLabel"
+                           HorizontalOptions="Center"
+                           Margin="0,5,0,0"
+                           FontSize="Large"
+                           FontAttributes="Bold"
+                           TextColor="Black"
+                           Text="{Binding CardLabel}" />
+                </VerticalStackLayout>
+                
+            </Frame>
+           
+            <Button x:Name="FlipBtn"
+                    Margin="0,5,0,0"
+                    Text="Flip flashcard"
+                    WidthRequest="150"
+                    HorizontalOptions="Center"
+                    Opacity="{Binding FlipBtnOpacity}"
+                    x:FieldModifier="Public"
+                    SemanticProperties.Hint="Flip the flashcard"
+                    Command="{Binding FlipCommand}" />
+            <Button x:Name="YesBtn"
+                    Margin="0,5,0,0"
+                    Text="YES"
+                    WidthRequest="150"
+                    HorizontalOptions="Center"
+                    Opacity="{Binding ResultBtnsOpacity}"
+                    SemanticProperties.Hint="I knew flashcard"
+                    Command="{Binding YesCommand}" />
+            <Button x:Name="NoBtn"
+                    Margin="0,5,0,0"
+                    Text="NO"
+                    WidthRequest="150"
+                    HorizontalOptions="Center"
+                    Opacity="{Binding ResultBtnsOpacity}"
+                    SemanticProperties.Hint="I didn't knew flashcard"
+                    Command="{Binding NoCommand}" />
+            <Button x:Name="SoundBtn"
+                    Margin="0,5,0,0"
+                    Text="Play sound"
+                    WidthRequest="150"
+                    HorizontalOptions="Center"
+                    Opacity="{Binding ResultBtnsOpacity}"
+                    SemanticProperties.Hint="Play sound of a flashcard"
+                    Command="{Binding PlayAudioCommand}" />
+        </VerticalStackLayout>
+        <Frame BackgroundColor="Grey"
+               Opacity="0.3"
+               IsVisible="{Binding IsBusy}" />
+        <ActivityIndicator IsRunning="{Binding IsBusy}"
+                           Color="Grey"
+                           HeightRequest="80" />
+    </Grid>
 </ContentPage>

@@ -14,6 +14,7 @@ namespace FishKeyApp.ViewModels
     [QueryProperty(nameof(CurrentFlashCard), nameof(CurrentFlashCard))]
     [QueryProperty(nameof(FlipBtnOpacity), nameof(FlipBtnOpacity))]
     [QueryProperty(nameof(ResultBtnsOpacity), nameof(ResultBtnsOpacity))]
+    [QueryProperty(nameof(IsBusy), nameof(IsBusy))]
 
     public partial class FlashCardViewModel : ObservableObject
     {
@@ -29,6 +30,7 @@ namespace FishKeyApp.ViewModels
             _databaseController = new DatabaseController();
             _cardCategoryController = new CardCategoryController();
             _ftpController = new FtpController();
+            IsBusy = false;
         }
 
         public Task InitAsync()
@@ -36,16 +38,19 @@ namespace FishKeyApp.ViewModels
             CurrentUser = _databaseController.GetUser(CurrentContext.Name);
             CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
             ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
+            _ftpController.DownloadMp3File(CurrentFlashCard.Mp3Url);
             CardLabel = CurrentFlashCard.Polish;
             FlipBtnOpacity = 1;
             ResultBtnsOpacity = 0;
+            IsBusy = false;
             return Task.CompletedTask;
         }
 
-        private void UpdateCurrentCard()
+        private async Task UpdateCurrentCard()
         {
             CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
             ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
+            await _ftpController.DownloadMp3FileAsync(CurrentFlashCard.Mp3Url);
             CardLabel = CurrentFlashCard.Polish;
         }
 
@@ -75,17 +80,26 @@ namespace FishKeyApp.ViewModels
         }
 
         [RelayCommand]
-        void Yes()
+        async Task Yes()
         {
-            CurrentUser = _databaseController.UpdateUser(CurrentUser, CurrentFlashCard);
-            _databaseController.SaveUser(CurrentUser);
-            UpdateCurrentCard();
-            if (ResultBtnsOpacity == 1)
+            IsBusy = true;
+            try
             {
-                ResultBtnsOpacity = 0;
-                FlipBtnOpacity = 1;
+                CurrentUser = _databaseController.UpdateUser(CurrentUser, CurrentFlashCard);
+                _databaseController.SaveUser(CurrentUser);
+                await UpdateCurrentCard();
+
+                if (ResultBtnsOpacity == 1)
+                {
+                    ResultBtnsOpacity = 0;
+                    FlipBtnOpacity = 1;
+                }
+                else return;
             }
-            else return;
+            catch (Exception e)
+            {
+            }
+            finally { IsBusy = false; }
         }
 
         [RelayCommand]
@@ -123,5 +137,8 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         FlashCardModel currentFlashCard;
+
+        [ObservableProperty]
+        bool isBusy;
     }
 }

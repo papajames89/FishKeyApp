@@ -9,11 +9,9 @@ namespace FishKeyApp.Controllers
         private readonly IAudioManager audioManager;
         protected IAudioPlayer player = null;       // media player
         protected FileStream stream = null;         // stream used for playing
-        private MediaState mediaState;
         public AudioPlayerController(IAudioManager audioManager)
         {
             this.audioManager = audioManager;
-            mediaState = MediaState.Stopped;
             _ftpController = new FtpController();
         }
         public void PlayAudio(string fileName)

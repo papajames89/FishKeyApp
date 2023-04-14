@@ -7,36 +7,40 @@
              x:Name="Page"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout>
-        <Button x:Name="BackBtn"
-                Text="Go Back"
-                SemanticProperties.Hint="Go to previous page button"
-                Command="{Binding GoBackCommand}"
-                HorizontalOptions="Center" />
-        <Border StrokeShape="RoundRectangle 10,10"
-                StrokeThickness="2"
-                BackgroundColor="Transparent"
-                Margin="30,10">
-            <controls:CustomEntry Text="{Binding UserName}"
-                                  Placeholder="Username"
-                                  FontSize="Micro"
-                                  Padding="10,10,10,10"
-                                  BackgroundColor="Transparent"
-                                  TextColor="Black"
-                                  VerticalOptions="Center"
-                                  HorizontalOptions="CenterAndExpand" />
-        </Border>
+    <Grid>
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Center">
+
+            <Button x:Name="BackBtn"
+                    Text="Go Back"
+                    SemanticProperties.Hint="Go to previous page button"
+                    Command="{Binding GoBackCommand}"
+                    HorizontalOptions="Center" />
+            <Border StrokeShape="RoundRectangle 10,10"
+                    StrokeThickness="2"
+                    BackgroundColor="Transparent"
+                    Margin="30,10">
+                <controls:CustomEntry Text="{Binding UserName}"
+                                      Placeholder="Username"
+                                      FontSize="Micro"
+                                      Padding="10,10,10,10"
+                                      BackgroundColor="Transparent"
+                                      TextColor="Black"
+                                      VerticalOptions="Center"
+                                      HorizontalOptions="CenterAndExpand" />
+            </Border>
+            <Button x:Name="CreateUserBtn"
+                    Text="Create"
+                    SemanticProperties.Hint="After click, creates user"
+                    Command="{Binding CreateUserCommand}"
+                    HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <Frame BackgroundColor="Grey"
+               Opacity=".3"
+               IsVisible="false"/>
         <ActivityIndicator IsRunning="True"
-                           Color="LightGrey" />
-        <Button x:Name="CreateUserBtn"
-                Text="Create"
-                SemanticProperties.Hint="After click, creates user"
-                Command="{Binding CreateUserCommand}"
-                HorizontalOptions="Center" />
-        <Button x:Name="RemoveAllUsersBtn"
-                Text="Remove All Users"
-                SemanticProperties.Hint="After click, all users are removed"
-                Command="{Binding RemoveAllUsersCommand}"
-                HorizontalOptions="Center" />
-    </VerticalStackLayout>
+                           IsVisible="false"
+                           Color="Grey"
+                           HeightRequest="80" />
+    </Grid>
 </ContentPage>

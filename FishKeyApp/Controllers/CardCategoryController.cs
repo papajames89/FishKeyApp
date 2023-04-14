@@ -23,7 +23,7 @@ namespace FishKeyApp.Controllers
             using (StreamReader reader = new StreamReader(stream))
             {
                 string result = reader.ReadToEnd();
-                return JsonConvert.DeserializeObject<List<FlashCardModel>>(result);
+                return JsonConvert.DeserializeObject<List<FlashCardModel>>(result).Where(x => x.ImgUrl != "nophoto.jpg").ToList();
             }
         }
 
