@@ -4,7 +4,8 @@
              xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
              x:Class="FishKeyApp.Views.DashboardPage"
              Shell.NavBarIsVisible="False"
-             x:Name="Page">
+             x:Name="Page"
+             Appearing="Page_Appearing">
 
     <VerticalStackLayout>
 
@@ -22,9 +23,13 @@
                             <ColumnDefinition Width="5*" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
                         <Button Grid.Column="0"
-                                Text="{Binding .}"
-                                CommandParameter="{Binding .}"
+                                Text="{Binding CategoryName}"
+                                CommandParameter="{Binding CategoryName}"
                                 Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToFlashCardPageCommand}" />
                         <Button x:Name="ResetCategoryBtn"
                                 Grid.Column="2"
@@ -34,8 +39,10 @@
                                 Padding="0"
                                 CornerRadius="30"
                                 BackgroundColor="LightSeaGreen"
-                                CommandParameter="{Binding .}"
+                                CommandParameter="{Binding CategoryName}"
                                 Command="{Binding Source={x:Reference Page}, Path=BindingContext.ResetCategoryCommand}" />
+                        <Label Grid.Row="1"
+                               Text="{Binding ProgressValue}"/>
                     </Grid>
                 </DataTemplate>
             </CollectionView.ItemTemplate>

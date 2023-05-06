@@ -19,7 +19,6 @@ namespace FishKeyApp.Views
             {
                 await vm.InitAsync();
             }
-
         }
     }
 }

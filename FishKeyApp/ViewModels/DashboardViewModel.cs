@@ -11,25 +11,111 @@ namespace FishKeyApp.ViewModels
     [QueryProperty(nameof(Categories), nameof(Categories))]
     public partial class DashboardViewModel : ObservableObject
     {
+        private DatabaseController _databaseController;
         private CurrentContextModel _currentContextModel;
         private readonly CardCategoryController _cardCategoryController;
         public DashboardViewModel()
         {
-            categories = new List<string>()
-            {
-                "A1",
-                "A2",
-                "B1",
-                "B2",
-                "Na lotnisku",
-                "Czesci ciala",
-                "Jedzenie i picie",
-                "Kategoria testowa"
-            };
+            _databaseController = new DatabaseController();
             _currentContextModel = new CurrentContextModel() { Name = user };
             _cardCategoryController = new CardCategoryController();
+            //categories = new List<CategoryProgressModel>
+            //{
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "A1",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "A1").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "A2",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "A2").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "B1",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "B1").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "B2",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "B2").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "Na lotnisku",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Na lotnisku").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "Czesci ciala",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Czesci ciala").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "Jedzenie i picie",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Jedzenie i picie").ToString()
+            //    },
+            //    new CategoryProgressModel()
+            //    {
+            //        CategoryName = "Kategoria testowa",
+            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Kategoria testowa").ToString()
+            //    }
+            //};
         }
 
+        public Task InitAsync()
+        {
+            Categories = new List<CategoryProgressModel>
+            {
+                new CategoryProgressModel()
+                {
+                    CategoryName = "A1",
+                    ProgressValue = GetCategoryProgressLabel(User, "A1")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "A2",
+                    ProgressValue = GetCategoryProgressLabel(User, "A2")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "B1",
+                    ProgressValue = GetCategoryProgressLabel(User, "B1")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "B2",
+                    ProgressValue = GetCategoryProgressLabel(User, "B2")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "Na lotnisku",
+                    ProgressValue = GetCategoryProgressLabel(User, "Na lotnisku")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "Czesci ciala",
+                    ProgressValue = GetCategoryProgressLabel(User, "Czesci ciala")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "Jedzenie i picie",
+                    ProgressValue = GetCategoryProgressLabel(User, "Jedzenie i picie")
+                },
+                new CategoryProgressModel()
+                {
+                    CategoryName = "Kategoria testowa",
+                    ProgressValue = GetCategoryProgressLabel(User, "Kategoria testowa")
+                }
+            };
+            return Task.CompletedTask;
+        }
+
+        private string GetCategoryProgressLabel(string user, string category)
+        {
+            return $"{((int)(_cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), category)*100))} %";
+        }
 
         [RelayCommand]
         Task LogOut() => Shell.Current.GoToAsync($"../..");
@@ -38,6 +124,7 @@ namespace FishKeyApp.ViewModels
         public void ResetCategory(string category)
         {
             _cardCategoryController.ResetCategoryProgress(user, category);
+            InitAsync();
         }
 
         [RelayCommand]
@@ -56,6 +143,6 @@ namespace FishKeyApp.ViewModels
         string user;
 
         [ObservableProperty]
-        public List<string> categories;
+        public List<CategoryProgressModel> categories;
     }
 }
