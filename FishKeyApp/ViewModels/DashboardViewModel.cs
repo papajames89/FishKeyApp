@@ -19,49 +19,6 @@ namespace FishKeyApp.ViewModels
             _databaseController = new DatabaseController();
             _currentContextModel = new CurrentContextModel() { Name = user };
             _cardCategoryController = new CardCategoryController();
-            //categories = new List<CategoryProgressModel>
-            //{
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "A1",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "A1").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "A2",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "A2").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "B1",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "B1").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "B2",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "B2").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "Na lotnisku",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Na lotnisku").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "Czesci ciala",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Czesci ciala").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "Jedzenie i picie",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Jedzenie i picie").ToString()
-            //    },
-            //    new CategoryProgressModel()
-            //    {
-            //        CategoryName = "Kategoria testowa",
-            //        //ProgressValue = _cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), "Kategoria testowa").ToString()
-            //    }
-            //};
         }
 
         public Task InitAsync()
