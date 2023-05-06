@@ -15,6 +15,9 @@ namespace FishKeyApp.ViewModels
     [QueryProperty(nameof(FlipBtnOpacity), nameof(FlipBtnOpacity))]
     [QueryProperty(nameof(ResultBtnsOpacity), nameof(ResultBtnsOpacity))]
     [QueryProperty(nameof(IsBusy), nameof(IsBusy))]
+    [QueryProperty(nameof(ProgressValue), nameof(ProgressValue))]
+    [QueryProperty(nameof(ProgressValuePercentage), nameof(ProgressValuePercentage))]
+    [QueryProperty(nameof(CardHeightRequest), nameof(CardHeightRequest))]
 
     public partial class FlashCardViewModel : ObservableObject
     {
@@ -22,7 +25,7 @@ namespace FishKeyApp.ViewModels
         private readonly AudioPlayerController _audioPlayerController;
         private readonly DatabaseController _databaseController;
         private readonly CardCategoryController _cardCategoryController;
-        private bool _isFlipped = false;
+        private int _cardHeightRequest = 300;
 
         public FlashCardViewModel(IAudioManager audioManager)
         {
@@ -37,13 +40,25 @@ namespace FishKeyApp.ViewModels
         {
             CurrentUser = _databaseController.GetUser(CurrentContext.Name);
             CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
+            CardLabel = CurrentFlashCard.Polish;
+            ProgressValue = _cardCategoryController.GetCategoryProgress(CurrentUser, Category);
+            ProgressValuePercentage = $"{(Int16)(ProgressValue*100)} %";
+            CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
             ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
             _ftpController.DownloadMp3File(CurrentFlashCard.Mp3Url);
-            CardLabel = CurrentFlashCard.Polish;
             FlipBtnOpacity = 1;
             ResultBtnsOpacity = 0;
             IsBusy = false;
             return Task.CompletedTask;
+        }
+
+        private int GetCardHeightRequest(int sentenceLenght)
+        {
+            if (sentenceLenght > 30)
+            {
+                return 320;
+            }
+            else return _cardHeightRequest;
         }
 
         private async Task UpdateCurrentCard()
@@ -69,6 +84,7 @@ namespace FishKeyApp.ViewModels
             if (CardLabel == CurrentFlashCard.Polish)
             {
                 CardLabel = CurrentFlashCard.English;
+                CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
             }
 
             if (FlipBtnOpacity == 1)
@@ -87,6 +103,8 @@ namespace FishKeyApp.ViewModels
             {
                 CurrentUser = _databaseController.UpdateUser(CurrentUser, CurrentFlashCard);
                 _databaseController.SaveUser(CurrentUser);
+                ProgressValue = _cardCategoryController.GetCategoryProgress(CurrentUser, Category);
+                ProgressValuePercentage = $"{(Int16)(ProgressValue * 100)} %";
                 await UpdateCurrentCard();
 
                 if (ResultBtnsOpacity == 1)
@@ -140,5 +158,14 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         bool isBusy;
+
+        [ObservableProperty]
+        double progressValue;
+
+        [ObservableProperty]
+        string progressValuePercentage;
+
+        [ObservableProperty]
+        int cardHeightRequest;
     }
 }

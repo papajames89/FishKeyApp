@@ -33,6 +33,18 @@ namespace FishKeyApp.Controllers
             {
                 case "A1":
                     return GetCategory("a1");
+                case "A2":
+                    return GetCategory("a2");
+                case "B1":
+                    return GetCategory("b1");
+                case "B2":
+                    return GetCategory("b2");
+                case "Czesci ciala":
+                    return GetCategory("Czesci ciala");
+                case "Na lotnisku":
+                    return GetCategory("Na lotnisku");
+                case "Jedzenie i picie":
+                    return GetCategory("Jedzenie i picie");
                 case "Kategoria testowa":
                     return GetCategory("Kategoria testowa");
                 default:
@@ -59,6 +71,11 @@ namespace FishKeyApp.Controllers
                 Mp3Url = string.Empty,
                 Category = string.Empty
             };
+        }
+
+        public double GetCategoryProgress(UserModel user, string category)
+        {
+            return (double)user.KnownCards.Where(c => c.Category.ToLower() == category.ToLower()).Count() / (double)SelectedCategory(category).Count();
         }
 
         public void ResetCategoryProgress(string userName, string category)

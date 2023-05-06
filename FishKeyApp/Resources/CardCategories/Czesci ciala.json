@@ -1,0 +1,442 @@
+[
+    {
+        "id": 1,
+        "category": "czesci ciala",
+        "polish": "ramię",
+        "english": "arm",
+        "mp3Url": "arm.mp3",
+        "imgUrl": "arm.jpg"
+    },
+    {
+        "id": 2,
+        "category": "czesci ciala",
+        "polish": "ciało",
+        "english": "body",
+        "mp3Url": "body.mp3",
+        "imgUrl": "body.jpg"
+    },
+    {
+        "id": 3,
+        "category": "czesci ciala",
+        "polish": "ucho",
+        "english": "ear",
+        "mp3Url": "ear.mp3",
+        "imgUrl": "ear.jpg"
+    },
+    {
+        "id": 4,
+        "category": "czesci ciala",
+        "polish": "oko",
+        "english": "eye",
+        "mp3Url": "eye.mp3",
+        "imgUrl": "eye.jpg"
+    },
+    {
+        "id": 5,
+        "category": "czesci ciala",
+        "polish": "twarz",
+        "english": "face",
+        "mp3Url": "face.mp3",
+        "imgUrl": "face.jpg"
+    },
+    {
+        "id": 6,
+        "category": "czesci ciala",
+        "polish": "stopy",
+        "english": "feet",
+        "mp3Url": "feet.mp3",
+        "imgUrl": "feet.jpg"
+    },
+    {
+        "id": 7,
+        "category": "czesci ciala",
+        "polish": "stopa",
+        "english": "foot",
+        "mp3Url": "foot.mp3",
+        "imgUrl": "foot.jpg"
+    },
+    {
+        "id": 8,
+        "category": "czesci ciala",
+        "polish": "włosy",
+        "english": "hair",
+        "mp3Url": "hair.mp3",
+        "imgUrl": "hair.jpg"
+    },
+    {
+        "id": 9,
+        "category": "czesci ciala",
+        "polish": "dłoń, ręka",
+        "english": "hand",
+        "mp3Url": "hand.mp3",
+        "imgUrl": "hand.jpg"
+    },
+    {
+        "id": 10,
+        "category": "czesci ciala",
+        "polish": "głowa",
+        "english": "head",
+        "mp3Url": "head.mp3",
+        "imgUrl": "head.jpg"
+    },
+    {
+        "id": 11,
+        "category": "czesci ciala",
+        "polish": "noga",
+        "english": "leg",
+        "mp3Url": "leg.mp3",
+        "imgUrl": "leg.jpg"
+    },
+    {
+        "id": 12,
+        "category": "czesci ciala",
+        "polish": "usta",
+        "english": "mouth",
+        "mp3Url": "mouth.mp3",
+        "imgUrl": "mouth.jpg"
+    },
+    {
+        "id": 13,
+        "category": "czesci ciala",
+        "polish": "nos",
+        "english": "nose",
+        "mp3Url": "nose.mp3",
+        "imgUrl": "nose.jpg"
+    },
+    {
+        "id": 14,
+        "category": "czesci ciala",
+        "polish": "zęby",
+        "english": "teeth",
+        "mp3Url": "teeth.mp3",
+        "imgUrl": "teeth.jpg"
+    },
+    {
+        "id": 15,
+        "category": "czesci ciala",
+        "polish": "ząb",
+        "english": "tooth",
+        "mp3Url": "tooth.mp3",
+        "imgUrl": "tooth.jpg"
+    },
+    {
+        "id": 16,
+        "category": "czesci ciala",
+        "polish": "plecy; kręgosłup",
+        "english": "back",
+        "mp3Url": "back.mp3",
+        "imgUrl": "back.jpg"
+    },
+    {
+        "id": 17,
+        "category": "czesci ciala",
+        "polish": "palec (u dłoni)",
+        "english": "finger",
+        "mp3Url": "finger.mp3",
+        "imgUrl": "finger.jpg"
+    },
+    {
+        "id": 18,
+        "category": "czesci ciala",
+        "polish": "szyja, kark",
+        "english": "neck",
+        "mp3Url": "neck.mp3",
+        "imgUrl": "neck.jpg"
+    },
+    {
+        "id": 19,
+        "category": "czesci ciala",
+        "polish": "palec u stopy",
+        "english": "toe",
+        "mp3Url": "toe.mp3",
+        "imgUrl": "toe.jpg"
+    },
+    {
+        "id": 20,
+        "category": "czesci ciala",
+        "polish": "kostka",
+        "english": "ankle",
+        "mp3Url": "ankle.mp3",
+        "imgUrl": "ankle.jpg"
+    },
+    {
+        "id": 21,
+        "category": "czesci ciala",
+        "polish": "tyłek, pupa, pośladki",
+        "english": "bottom",
+        "mp3Url": "bottom.mp3",
+        "imgUrl": "bottom-1.jpg"
+    },
+    {
+        "id": 22,
+        "category": "czesci ciala",
+        "polish": "pierś",
+        "english": "breast",
+        "mp3Url": "breast.mp3",
+        "imgUrl": "breast.jpg"
+    },
+    {
+        "id": 23,
+        "category": "czesci ciala",
+        "polish": "policzek",
+        "english": "cheek",
+        "mp3Url": "cheek.mp3",
+        "imgUrl": "cheek.jpg"
+    },
+    {
+        "id": 24,
+        "category": "czesci ciala",
+        "polish": "podbródek, broda",
+        "english": "chin",
+        "mp3Url": "chin.mp3",
+        "imgUrl": "chin.jpg"
+    },
+    {
+        "id": 25,
+        "category": "czesci ciala",
+        "polish": "łokieć",
+        "english": "elbow",
+        "mp3Url": "elbow.mp3",
+        "imgUrl": "elbow.jpg"
+    },
+    {
+        "id": 26,
+        "category": "czesci ciala",
+        "polish": "czoło",
+        "english": "forehead",
+        "mp3Url": "forehead.mp3",
+        "imgUrl": "forehead.jpg"
+    },
+    {
+        "id": 27,
+        "category": "czesci ciala",
+        "polish": "kolano",
+        "english": "knee",
+        "mp3Url": "knee.mp3",
+        "imgUrl": "knee.jpg"
+    },
+    {
+        "id": 28,
+        "category": "czesci ciala",
+        "polish": "warga",
+        "english": "lip",
+        "mp3Url": "lip.mp3",
+        "imgUrl": "lip.jpg"
+    },
+    {
+        "id": 29,
+        "category": "czesci ciala",
+        "polish": "ramię, bark",
+        "english": "shoulder",
+        "mp3Url": "shoulder.mp3",
+        "imgUrl": "shoulder.jpg"
+    },
+    {
+        "id": 30,
+        "category": "czesci ciala",
+        "polish": "bok",
+        "english": "side",
+        "mp3Url": "side.mp3",
+        "imgUrl": "side.jpg"
+    },
+    {
+        "id": 31,
+        "category": "czesci ciala",
+        "polish": "skóra",
+        "english": "skin",
+        "mp3Url": "skin.mp3",
+        "imgUrl": "skin.jpg"
+    },
+    {
+        "id": 32,
+        "category": "czesci ciala",
+        "polish": "kciuk",
+        "english": "thumb",
+        "mp3Url": "thumb.mp3",
+        "imgUrl": "thumb.jpg"
+    },
+    {
+        "id": 33,
+        "category": "czesci ciala",
+        "polish": "język",
+        "english": "tongue",
+        "mp3Url": "tongue.mp3",
+        "imgUrl": "tongue.jpg"
+    },
+    {
+        "id": 34,
+        "category": "czesci ciala",
+        "polish": "klatka piersiowa",
+        "english": "chest",
+        "mp3Url": "chest.mp3",
+        "imgUrl": "chest.jpg"
+    },
+    {
+        "id": 35,
+        "category": "czesci ciala",
+        "polish": "brwi",
+        "english": "eyebrows",
+        "mp3Url": "eyebrows.mp3",
+        "imgUrl": "eyebrow.jpg"
+    },
+    {
+        "id": 36,
+        "category": "czesci ciala",
+        "polish": "rzęsy",
+        "english": "eyelashes",
+        "mp3Url": "eyelashes.mp3",
+        "imgUrl": "eyelashes.jpg"
+    },
+    {
+        "id": 37,
+        "category": "czesci ciala",
+        "polish": "powieka",
+        "english": "eyelid",
+        "mp3Url": "eyelid.mp3",
+        "imgUrl": "eyelid.jpg"
+    },
+    {
+        "id": 38,
+        "category": "czesci ciala",
+        "polish": "paznokieć (palca u dłoni)",
+        "english": "fingernail",
+        "mp3Url": "fingernail.mp3",
+        "imgUrl": "fingernail.jpg"
+    },
+    {
+        "id": 39,
+        "category": "czesci ciala",
+        "polish": "dziąsło",
+        "english": "gum",
+        "mp3Url": "gum.mp3",
+        "imgUrl": "gum.jpg"
+    },
+    {
+        "id": 40,
+        "category": "czesci ciala",
+        "polish": "pięta",
+        "english": "heel",
+        "mp3Url": "heel.mp3",
+        "imgUrl": "heel-1.jpg"
+    },
+    {
+        "id": 41,
+        "category": "czesci ciala",
+        "polish": "biodro",
+        "english": "hip",
+        "mp3Url": "hip.mp3",
+        "imgUrl": "hip.jpg"
+    },
+    {
+        "id": 42,
+        "category": "czesci ciala",
+        "polish": "paznokieć",
+        "english": "nail",
+        "mp3Url": "nail.mp3",
+        "imgUrl": "nail.jpg"
+    },
+    {
+        "id": 43,
+        "category": "czesci ciala",
+        "polish": "pępek",
+        "english": "navel",
+        "mp3Url": "navel.mp3",
+        "imgUrl": "navel.jpg"
+    },
+    {
+        "id": 44,
+        "category": "czesci ciala",
+        "polish": "dłoń (wewnętrzna strona)",
+        "english": "palm",
+        "mp3Url": "palm.mp3",
+        "imgUrl": "palm-1.jpg"
+    },
+    {
+        "id": 45,
+        "category": "czesci ciala",
+        "polish": "udo",
+        "english": "thigh",
+        "mp3Url": "thigh.mp3",
+        "imgUrl": "thigh.jpg"
+    },
+    {
+        "id": 46,
+        "category": "czesci ciala",
+        "polish": "paznokieć u stopy",
+        "english": "toenail",
+        "mp3Url": "toenail.mp3",
+        "imgUrl": "toenail.jpg"
+    },
+    {
+        "id": 47,
+        "category": "czesci ciala",
+        "polish": "pas, talia",
+        "english": "waist",
+        "mp3Url": "waist.mp3",
+        "imgUrl": "waist.jpg"
+    },
+    {
+        "id": 48,
+        "category": "czesci ciala",
+        "polish": "nadgarstek",
+        "english": "wrist",
+        "mp3Url": "wrist.mp3",
+        "imgUrl": "wrist.jpg"
+    },
+    {
+        "id": 49,
+        "category": "czesci ciala",
+        "polish": "łydka",
+        "english": "calf",
+        "mp3Url": "calf.mp3",
+        "imgUrl": "calf-1.jpg"
+    },
+    {
+        "id": 50,
+        "category": "czesci ciala",
+        "polish": "mały palec u ręki",
+        "english": "little finger",
+        "mp3Url": "little-finger.mp3",
+        "imgUrl": "little-finger.jpg"
+    },
+    {
+        "id": 51,
+        "category": "czesci ciala",
+        "polish": "palec środkowy",
+        "english": "middle finger",
+        "mp3Url": "middle-finger.mp3",
+        "imgUrl": "middle-finger.jpg"
+    },
+    {
+        "id": 52,
+        "category": "czesci ciala",
+        "polish": "pięść",
+        "english": "fist",
+        "mp3Url": "fist.mp3",
+        "imgUrl": "fist.jpg"
+    },
+    {
+        "id": 53,
+        "category": "czesci ciala",
+        "polish": "palec wskazujący",
+        "english": "forefinger",
+        "mp3Url": "forefinger.mp3",
+        "imgUrl": "forefinger.jpg"
+    },
+    {
+        "id": 54,
+        "category": "czesci ciala",
+        "polish": "palec serdeczny",
+        "english": "ring finger",
+        "mp3Url": "ring-finger.mp3",
+        "imgUrl": "ring-finger.jpg"
+    },
+    {
+        "id": 55,
+        "category": "czesci ciala",
+        "polish": "goleń",
+        "english": "shin",
+        "mp3Url": "shin.mp3",
+        "imgUrl": "shin.jpg"
+    }
+]

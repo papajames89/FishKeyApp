@@ -49,11 +49,23 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\CardCategories\a1.json" />
+		<None Remove="Resources\CardCategories\a2.json" />
+		<None Remove="Resources\CardCategories\b1.json" />
+		<None Remove="Resources\CardCategories\b2.json" />
+		<None Remove="Resources\CardCategories\Jedzenie i picie.json" />
+		<None Remove="Resources\CardCategories\Czesci ciala.json" />
+		<None Remove="Resources\CardCategories\Na lotnisku.json" />
 	  <None Remove="Resources\CardCategories\Kategoria testowa.json" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <EmbeddedResource Include="Resources\CardCategories\a1.json" />
+		<EmbeddedResource Include="Resources\CardCategories\a2.json" />
+		<EmbeddedResource Include="Resources\CardCategories\b1.json" />
+		<EmbeddedResource Include="Resources\CardCategories\b2.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Jedzenie i picie.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Czesci ciala.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Na lotnisku.json" />
 	  <EmbeddedResource Include="Resources\CardCategories\Kategoria testowa.json" />
 	</ItemGroup>
 

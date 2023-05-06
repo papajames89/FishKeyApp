@@ -18,6 +18,12 @@ namespace FishKeyApp.ViewModels
             categories = new List<string>()
             {
                 "A1",
+                "A2",
+                "B1",
+                "B2",
+                "Na lotnisku",
+                "Czesci ciala",
+                "Jedzenie i picie",
                 "Kategoria testowa"
             };
             _currentContextModel = new CurrentContextModel() { Name = user };
