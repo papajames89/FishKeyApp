@@ -106,6 +106,7 @@ namespace FishKeyApp.ViewModels
                 ProgressValue = _cardCategoryController.GetCategoryProgress(CurrentUser, Category);
                 ProgressValuePercentage = $"{(Int16)(ProgressValue * 100)} %";
                 await UpdateCurrentCard();
+                CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
 
                 if (ResultBtnsOpacity == 1)
                 {
@@ -121,9 +122,10 @@ namespace FishKeyApp.ViewModels
         }
 
         [RelayCommand]
-        void No()
+        async Task No()
         {
-            UpdateCurrentCard();
+            await UpdateCurrentCard();
+            CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
             if (ResultBtnsOpacity == 1)
             {
                 ResultBtnsOpacity = 0;
