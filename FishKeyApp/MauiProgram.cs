@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Maui;
+using epj.RadialDial.Maui;
 using FishKeyApp.Controls;
 #if ANDROID
 using FishKeyApp.Platforms.Android;
@@ -30,6 +31,7 @@ namespace FishKeyApp
                     fonts.AddFont("Roboto-Regular.ttf", "RobotoRegular");
                     fonts.AddFont("Roboto-Thin.ttf", "RobotoThin");
                 })
+                .UseRadialDial()
                 .ConfigureLifecycleEvents(events =>
                 {
 #if ANDROID

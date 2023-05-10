@@ -3,11 +3,14 @@ using CommunityToolkit.Mvvm.Input;
 using FishKeyApp.Controllers;
 using FishKeyApp.Models;
 using FishKeyApp.Views;
+using System.Reflection.PortableExecutable;
 
 namespace FishKeyApp.ViewModels
 {
     [QueryProperty(nameof(User), nameof(User))]
     [QueryProperty(nameof(Categories), nameof(Categories))]
+    [QueryProperty(nameof(PageHeader), nameof(PageHeader))]
+    [QueryProperty(nameof(Subtitle), nameof(Subtitle))]
     public partial class DashboardViewModel : ObservableObject
     {
         private DatabaseController _databaseController;
@@ -18,6 +21,8 @@ namespace FishKeyApp.ViewModels
             _databaseController = new DatabaseController();
             _currentContextModel = new CurrentContextModel() { Name = user };
             _cardCategoryController = new CardCategoryController();
+            PageHeader = "Select category";
+            Subtitle = "It is important to exercise caution when clicking the reset button, as this action cannot be reversed.";
         }
 
         public Task InitAsync()
@@ -70,7 +75,7 @@ namespace FishKeyApp.ViewModels
 
         private string GetCategoryProgressLabel(string user, string category)
         {
-            return $"{((int)(_cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), category)*100))} %";
+            return $"{((int)(_cardCategoryController.GetCategoryProgress(_databaseController.GetUser(user), category)*100))}";
         }
 
         [RelayCommand]
@@ -100,5 +105,11 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         public List<CategoryProgressModel> categories;
+
+        [ObservableProperty]
+        string pageHeader;
+
+        [ObservableProperty]
+        string subtitle;
     }
 }
