@@ -8,6 +8,15 @@
              Shell.NavBarIsVisible="False">
 
     <VerticalStackLayout>
+        <ImageButton Source="chevron_left.png"
+                     MaximumHeightRequest="30"
+                     Grid.Column="0"
+                     HorizontalOptions="Start"
+                     Margin="0,35"
+                     Opacity="0.5"
+                     Command="{Binding GoBackCommand}" />
+        <Image Source="fishkey_logo.png"
+               MaximumHeightRequest="100" />
         <Button x:Name="BackBtn"
                 Text="Go Back"
                 SemanticProperties.Hint="Go to previous page button"

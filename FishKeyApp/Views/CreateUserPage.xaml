@@ -3,44 +3,88 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
              xmlns:controls="clr-namespace:FishKeyApp.Controls"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="FishKeyApp.Views.CreateUserPage"
              x:Name="Page"
              Shell.NavBarIsVisible="False">
 
-    <Grid>
+    <Grid Margin="0,50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout>
+            <ImageButton Source="chevron_left.png"
+                   MaximumHeightRequest="30"
+                   Grid.Column="0"
+                   Margin="20,35,0,0"
+                   Opacity="0.5"
+                   Command="{Binding GoBackCommand}"/>
+        </VerticalStackLayout>
+        
         <VerticalStackLayout HorizontalOptions="Center"
-                             VerticalOptions="Center">
+                             VerticalOptions="Start"
+                             Grid.Column="1">
+            <Image Source="fishkey_logo.png"
+                    MaximumHeightRequest="100"/>
+            <Label Text="{Binding PageHeader}"
+                   HorizontalOptions="Center"
+                   TextColor="Black"
+                   Opacity="0.9"
+                   FontSize="40"
+                   Padding="0"
+                   Margin="0,40,0,30"
+                   FontFamily="RobotoBold"/>
 
-            <Button x:Name="BackBtn"
-                    Text="Go Back"
-                    SemanticProperties.Hint="Go to previous page button"
-                    Command="{Binding GoBackCommand}"
-                    HorizontalOptions="Center" />
-            <Border StrokeShape="RoundRectangle 10,10"
-                    StrokeThickness="2"
+            <Border StrokeShape="RoundRectangle 5,5"
+                    StrokeThickness="0.7"
+                    Stroke="Black"
                     BackgroundColor="Transparent"
-                    Margin="30,10">
+                    Margin="30,0,30,0">
                 <controls:CustomEntry Text="{Binding UserName}"
                                       Placeholder="Username"
                                       FontSize="Micro"
-                                      Padding="10,10,10,10"
                                       BackgroundColor="Transparent"
                                       TextColor="Black"
                                       VerticalOptions="Center"
                                       HorizontalOptions="CenterAndExpand" />
             </Border>
-            <Button x:Name="CreateUserBtn"
-                    Text="Create"
-                    SemanticProperties.Hint="After click, creates user"
-                    Command="{Binding CreateUserCommand}"
-                    HorizontalOptions="Center" />
+            <Label Text="{Binding Subtitle}"
+                   HorizontalOptions="Center"
+                   TextColor="Black"
+                   Opacity="0.6"
+                   FontSize="14"
+                   MaximumWidthRequest="250"
+                   Margin="0,50,0,30"
+                   FontFamily="RobotoRegular" />
+            <Button Text="CREATE"
+                    FontFamily="RobotoBold"
+                    FontSize="14"
+                    CornerRadius="30"
+                    HeightRequest="30"
+                    WidthRequest="200"
+                    Padding="0"
+                    Margin="0"
+                    Command="{Binding CreateUserCommand}">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="1,0"
+                                         EndPoint="0,1">
+                        <GradientStop Color="#fbb040"
+                                      Offset="0.3" />
+                        <GradientStop Color="#ef4136"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="5,5"
+                            Radius="10"
+                            Opacity="0.5" />
+                </Button.Shadow>
+            </Button>
         </VerticalStackLayout>
-        <Frame BackgroundColor="Grey"
-               Opacity=".3"
-               IsVisible="false"/>
-        <ActivityIndicator IsRunning="True"
-                           IsVisible="false"
-                           Color="Grey"
-                           HeightRequest="80" />
     </Grid>
+
+
 </ContentPage>

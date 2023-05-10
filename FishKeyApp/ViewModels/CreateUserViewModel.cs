@@ -7,6 +7,8 @@ using FishKeyApp.Views;
 namespace FishKeyApp.ViewModels
 {
     [QueryProperty(nameof(UserName), nameof(UserName))]
+    [QueryProperty(nameof(PageHeader), nameof(PageHeader))]
+    [QueryProperty(nameof(Subtitle), nameof(Subtitle))]
     public partial class CreateUserViewModel : ObservableObject
     {
         private readonly DatabaseController _databaseController;
@@ -14,6 +16,8 @@ namespace FishKeyApp.ViewModels
         {
             _databaseController = new DatabaseController();
             var test = FileSystem.Current.AppDataDirectory;
+            PageHeader = "My first name is";
+            Subtitle = "This is how your account will appear in FishKey app and you will not be able to change it";
         }
         [RelayCommand]
         Task GoBack()
@@ -41,5 +45,11 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         private string userName;
+
+        [ObservableProperty]
+        string pageHeader;
+
+        [ObservableProperty]
+        string subtitle;
     }
 }
