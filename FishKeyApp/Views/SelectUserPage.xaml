@@ -7,56 +7,118 @@
              x:Name="Page"
              Shell.NavBarIsVisible="False">
 
-    <VerticalStackLayout>
-        <ImageButton Source="chevron_left.png"
-                     MaximumHeightRequest="30"
-                     Grid.Column="0"
-                     HorizontalOptions="Start"
-                     Margin="0,35"
-                     Opacity="0.5"
-                     Command="{Binding GoBackCommand}" />
-        <Image Source="fishkey_logo.png"
-               MaximumHeightRequest="100" />
-        <Button x:Name="BackBtn"
-                Text="Go Back"
-                SemanticProperties.Hint="Go to previous page button"
-                Command="{Binding GoBackCommand}"
-                HorizontalOptions="Center" />
+    <Grid Margin="0,50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        <VerticalStackLayout>
+            <ImageButton Source="chevron_left.png"
+                         MaximumHeightRequest="30"
+                         Grid.Column="0"
+                         Margin="20,35,0,0"
+                         Opacity="0.5"
+                         Command="{Binding GoBackCommand}" />
+        </VerticalStackLayout>
 
-        <CollectionView x:Name="UsersList"
-                        ItemsSource="{Binding ListOfUsers}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Grid Padding="10">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="5*" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
-                        <Button x:Name="UserNameBtn"
-                                Grid.Column="0"
-                                Text="{Binding Name}"
-                                CornerRadius="15"
-                                WidthRequest="250"
-                                BackgroundColor="DarkOrange"
-                                CommandParameter="{Binding Name}"
-                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}" />
-                        <Button x:Name="DeleteUserBtn"
-                                Grid.Column="2"
-                                Text="Delete"
-                                HorizontalOptions="End"
-                                WidthRequest="60"
-                                Padding="0"
-                                CornerRadius="30"
-                                BackgroundColor="LightSeaGreen"
-                                CommandParameter="{Binding Name}"
-                                Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveUserCommand}" />
-                    </Grid>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-        <Button x:Name="RemoveAllUsersBtn2"
-                Text="Remove All Users"
-                Command="{Binding RemoveAllUsersCommand}"
-                HorizontalOptions="Center" />
-    </VerticalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Start"
+                             Grid.Column="1">
+            <Image Source="fishkey_logo.png"
+                   MaximumHeightRequest="100" />
+            <Label Text="{Binding PageHeader}"
+                   HorizontalOptions="Center"
+                   TextColor="Black"
+                   Opacity="0.9"
+                   FontSize="30"
+                   Padding="0"
+                   Margin="0,40,0,30"
+                   FontFamily="RobotoBold" />
+
+            <CollectionView x:Name="UsersList"
+                            ItemsSource="{Binding ListOfUsers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Padding="0,10,0,10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*" />
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Button x:Name="UserNameBtn"
+                                    Grid.Column="1"
+                                    Text="{Binding Name}"
+                                    FontFamily="RobotoLight"
+                                    FontSize="14"
+                                    TextColor="Grey"
+                                    CornerRadius="15"
+                                    WidthRequest="200"
+                                    HeightRequest="30"
+                                    Padding="0"
+                                    BackgroundColor="White"
+                                    CommandParameter="{Binding Name}"
+                                    Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToDashboardPageCommand}">
+                                <Button.Shadow>
+                                    <Shadow Brush="Black"
+                                            Offset="5,5"
+                                            Radius="10"
+                                            Opacity="0.2" />
+                                </Button.Shadow>
+                            </Button>
+                            <ImageButton Grid.Column="2"
+                                         HorizontalOptions="End"
+                                         Padding="0"
+                                         Source="delete_button.png"
+                                         MaximumHeightRequest="30"
+                                         CommandParameter="{Binding Name}"
+                                         Command="{Binding Source={x:Reference Page}, Path=BindingContext.RemoveUserCommand}">
+                                <ImageButton.Shadow>
+                                    <Shadow Brush="Black"
+                                            Offset="5,5"
+                                            Radius="10"
+                                            Opacity="0.2" />
+                                </ImageButton.Shadow>
+                            </ImageButton>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Button Text="REMOVE ALL USERS"
+                    FontFamily="RobotoBold"
+                    FontSize="14"
+                    CornerRadius="30"
+                    HeightRequest="30"
+                    WidthRequest="250"
+                    Padding="0"
+                    Margin="0,50,0,0"
+                    Command="{Binding RemoveAllUsersCommand}">
+                <Button.Background>
+                    <LinearGradientBrush StartPoint="1,0"
+                                         EndPoint="0,1">
+                        <GradientStop Color="#fbb040"
+                                      Offset="0.3" />
+                        <GradientStop Color="#ef4136"
+                                      Offset="1" />
+                    </LinearGradientBrush>
+                </Button.Background>
+                <Button.Shadow>
+                    <Shadow Brush="Black"
+                            Offset="5,5"
+                            Radius="10"
+                            Opacity="0.3" />
+                </Button.Shadow>
+            </Button>
+            
+            <Label Text="{Binding Subtitle}"
+                   HorizontalOptions="Center"
+                   TextColor="Black"
+                   Opacity="0.6"
+                   FontSize="14"
+                   MaximumWidthRequest="250"
+                   Margin="0,50,0,30"
+                   FontFamily="RobotoRegular" />
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>
