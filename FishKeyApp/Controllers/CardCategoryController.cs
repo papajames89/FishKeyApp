@@ -90,5 +90,10 @@ namespace FishKeyApp.Controllers
             _databaseController.SaveUser(user);
             Application.Current.MainPage.DisplayAlert(Alert, CategoryReset, Ok);
         }
+
+        public int GetCategoryWordsCount(string category)
+        {
+            return SelectedCategory(category).Count();
+        }
     }
 }

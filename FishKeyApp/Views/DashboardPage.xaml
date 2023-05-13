@@ -85,7 +85,7 @@
                             <AbsoluteLayout>
                                 <maui:RadialDial x:Name="RadialControlControl"
                                                  AbsoluteLayout.LayoutFlags="All, All, All, All"
-                                                 AbsoluteLayout.LayoutBounds="0.4, .5, .3, .3"
+                                                 AbsoluteLayout.LayoutBounds="0.43, .5, .3, .3"
                                                  Grid.Column="0"
                                                  DialWidth="8"
                                                  VerticalOptions="Center"

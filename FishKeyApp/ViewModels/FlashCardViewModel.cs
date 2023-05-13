@@ -18,6 +18,9 @@ namespace FishKeyApp.ViewModels
     [QueryProperty(nameof(ProgressValue), nameof(ProgressValue))]
     [QueryProperty(nameof(ProgressValuePercentage), nameof(ProgressValuePercentage))]
     [QueryProperty(nameof(CardHeightRequest), nameof(CardHeightRequest))]
+    [QueryProperty(nameof(WordsCounter), nameof(WordsCounter))]
+    [QueryProperty(nameof(Frame1ZIndex), nameof(Frame1ZIndex))]
+    [QueryProperty(nameof(Frame2ZIndex), nameof(Frame2ZIndex))]
 
     public partial class FlashCardViewModel : ObservableObject
     {
@@ -48,7 +51,10 @@ namespace FishKeyApp.ViewModels
             _ftpController.DownloadMp3File(CurrentFlashCard.Mp3Url);
             FlipBtnOpacity = 1;
             ResultBtnsOpacity = 0;
+            Frame1ZIndex = 2;
+            Frame2ZIndex = 1;
             IsBusy = false;
+            WordsCounter = $"{_cardCategoryController.GetCategoryWordsCount(Category)} words";
             return Task.CompletedTask;
         }
 
@@ -89,6 +95,8 @@ namespace FishKeyApp.ViewModels
 
             if (FlipBtnOpacity == 1)
             {
+                Frame1ZIndex = 1;
+                Frame2ZIndex = 2;
                 ResultBtnsOpacity = 1;
                 FlipBtnOpacity = 0;
             }
@@ -110,6 +118,8 @@ namespace FishKeyApp.ViewModels
 
                 if (ResultBtnsOpacity == 1)
                 {
+                    Frame1ZIndex = 2;
+                    Frame2ZIndex = 1;
                     ResultBtnsOpacity = 0;
                     FlipBtnOpacity = 1;
                 }
@@ -128,6 +138,8 @@ namespace FishKeyApp.ViewModels
             CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
             if (ResultBtnsOpacity == 1)
             {
+                Frame1ZIndex = 2;
+                Frame2ZIndex = 1;
                 ResultBtnsOpacity = 0;
                 FlipBtnOpacity = 1;
             }
@@ -169,5 +181,14 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         int cardHeightRequest;
+
+        [ObservableProperty]
+        string wordsCounter;
+
+        [ObservableProperty]
+        int frame1ZIndex;
+
+        [ObservableProperty]
+        int frame2ZIndex;
     }
 }
