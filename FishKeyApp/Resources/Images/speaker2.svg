@@ -1,0 +1,14 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+	<title>ok_grey</title>
+	<style>
+		.s0 { opacity: .5;fill: #ffffff } 
+		.s1 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 1.5 } 
+		.s2 { fill: #ffffff;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 8.8 } 
+		.s3 { fill: none;stroke: #ffffff;stroke-linecap: round;stroke-linejoin: round;stroke-width: 8.8 } 
+	</style>
+	<path id="Kształt 3" class="s0" d="m100 199c-54.7 0-99-44.3-99-99 0-54.7 44.3-99 99-99 54.7 0 99 44.3 99 99 0 54.7-44.3 99-99 99z"/>
+	<path id="Warstwa 6" class="s1" d=""/>
+	<path id="Kształt 4" class="s2" d="m30 86.3c0 0-0.2-16.7 15.2-16.8 15.5 0 15.2 0 15.2 0l45.7-36.5v134l-45.7-35h-18.2c0 0-12.4-3-12.2-12.2 0.2-9.2 0-33.5 0-33.5z"/>
+	<path id="Warstwa 7" class="s3" d="m130.5 75.6c0 0 20.4 26.3-1.5 48.7"/>
+	<path id="Warstwa 8" class="s3" d="m154.8 54.3c0 0 34.2 45.7 0 92.9"/>
+</svg>

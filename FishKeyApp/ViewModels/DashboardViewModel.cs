@@ -82,10 +82,10 @@ namespace FishKeyApp.ViewModels
         Task LogOut() => Shell.Current.GoToAsync($"../..");
 
         [RelayCommand]
-        public void ResetCategory(string category)
+        public async Task ResetCategory(string category)
         {
-            _cardCategoryController.ResetCategoryProgress(user, category);
-            InitAsync();
+            await _cardCategoryController.ResetCategoryProgress(user, category);
+            await InitAsync();
         }
 
         [RelayCommand]

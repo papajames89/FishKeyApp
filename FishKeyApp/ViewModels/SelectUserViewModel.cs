@@ -22,16 +22,16 @@ namespace FishKeyApp.ViewModels
         }
 
         [RelayCommand]
-        public void RemoveAllUsers()
+        public async Task RemoveAllUsers()
         {
-            _databaseController.RemoveAllUsers();
+            await _databaseController.RemoveAllUsers();
             ListOfUsers = _databaseController.GetListOfUsers();
         }
 
         [RelayCommand]
-        public void RemoveUser(string user)
+        public async Task RemoveUser(string user)
         {
-            _databaseController.RemoveUser(user);
+            await _databaseController.RemoveUser(user);
             ListOfUsers = _databaseController.GetListOfUsers();
         }
 

@@ -10,9 +10,13 @@ namespace FishKeyApp.Controllers
         private const int MaxUsers = 10;
         private const string Extension = ".json";
         private const string Ok = "Ok";
-        private const string UserExistAlert = "Wprowadzona nazwa użytwonika już istnieje, podaj inną nazwę użytkownika";
-        private const string ToManyUsersAlert = "Zbyt duża liczba użytkowników.Aby utworzyć kolejnego użytkownika, usuń jednego z instniejących.";
-        private const string Alert = "Uwaga";
+        private const string UserExistAlert = "User with this name already exists, change the username";
+        private const string ToManyUsersAlert = "Too many users. To create a new user, remove one of the existing ones.";
+        private const string DeleteAllUsersAlert = "Are you sure you want to delete all users?";
+        private const string DeleteUserAlert = "Are you sure you want to delete this users?";
+        private const string Alert = "Attention";
+        private const string Yes = "Yes";
+        private const string No = "No";
 
         public Task CreateDatabase(string name)
         {
@@ -88,20 +92,28 @@ namespace FishKeyApp.Controllers
             File.WriteAllText(localPath, serializedUser);
         }
 
-        public void RemoveUser(string name)
+        public async Task RemoveUser(string name)
         {
-            var fileName = $"{name}.json";
-            var localPath = Path.Combine(_dataDir, fileName);
+            var result = await App.Current.MainPage.DisplayAlert(Alert, DeleteUserAlert, Yes, No);
+            if (result)
+            {
+                var fileName = $"{name}.json";
+                var localPath = Path.Combine(_dataDir, fileName);
 
-            File.Delete(localPath);
+                File.Delete(localPath);
+            }
         }
 
-        public void RemoveAllUsers()
+        public async Task RemoveAllUsers()
         {
-            var jsonFilesPaths = Directory.GetFiles(_dataDir, "*.json").ToList();
-            foreach (var path in jsonFilesPaths)
+            var result = await App.Current.MainPage.DisplayAlert(Alert, DeleteAllUsersAlert, Yes, No);
+            if (result)
             {
-                File.Delete(path);
+                var jsonFilesPaths = Directory.GetFiles(_dataDir, "*.json").ToList();
+                foreach (var path in jsonFilesPaths)
+                {
+                    File.Delete(path);
+                }
             }
         }
     }

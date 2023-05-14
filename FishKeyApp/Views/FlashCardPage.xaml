@@ -84,6 +84,12 @@
                                FontAttributes="Bold"
                                TextColor="White"
                                Text="{Binding CardLabel}" />
+                        <ImageButton Source="speaker2.png"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     Margin="0,20,0,0"
+                                     IsVisible="{Binding IsVisibleSpeaker}"
+                                     Command="{Binding PlayAudioCommand}"/>
                     </VerticalStackLayout>
                 </Frame>
             </VerticalStackLayout>

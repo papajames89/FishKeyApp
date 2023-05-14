@@ -7,9 +7,10 @@ namespace FishKeyApp.Controllers
     class CardCategoryController
     {
         private readonly DatabaseController _databaseController;
-        private const string Alert = "Uwaga";
-        private const string CategoryReset = "Kategoria została przywrócona do stanu początkowego";
-        private const string Ok = "Ok";
+        private const string Alert = "Caution";
+        private const string CategoryReset = "Are you sure, you want to delete progress in this category?";
+        private const string Yes = "Yes";
+        private const string No = "No";
         public CardCategoryController()
         {
             _databaseController = new DatabaseController();
@@ -78,17 +79,20 @@ namespace FishKeyApp.Controllers
             return (double)user.KnownCards.Where(c => c.Category.ToLower() == category.ToLower()).Count() / (double)SelectedCategory(category).Count();
         }
 
-        public void ResetCategoryProgress(string userName, string category)
+        public async Task ResetCategoryProgress(string userName, string category)
         {
             var user = _databaseController.GetUser(userName);
             if (user.KnownCards.Count == 0)
             {
                 return; // user has no known cards
             }
-            user.KnownCards.RemoveAll(card => card.Category.ToLower() == category.ToLower());
+            var result = await App.Current.MainPage.DisplayAlert(Alert, CategoryReset, Yes, No);
+            if (result)
+            {
+                user.KnownCards.RemoveAll(card => card.Category.ToLower() == category.ToLower());
 
-            _databaseController.SaveUser(user);
-            Application.Current.MainPage.DisplayAlert(Alert, CategoryReset, Ok);
+                _databaseController.SaveUser(user);
+            }
         }
 
         public int GetCategoryWordsCount(string category)

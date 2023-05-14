@@ -21,6 +21,7 @@ namespace FishKeyApp.ViewModels
     [QueryProperty(nameof(WordsCounter), nameof(WordsCounter))]
     [QueryProperty(nameof(Frame1ZIndex), nameof(Frame1ZIndex))]
     [QueryProperty(nameof(Frame2ZIndex), nameof(Frame2ZIndex))]
+    [QueryProperty(nameof(IsVisibleSpeaker), nameof(IsVisibleSpeaker))]
 
     public partial class FlashCardViewModel : ObservableObject
     {
@@ -53,6 +54,7 @@ namespace FishKeyApp.ViewModels
             ResultBtnsOpacity = 0;
             Frame1ZIndex = 2;
             Frame2ZIndex = 1;
+            IsVisibleSpeaker = false;
             IsBusy = false;
             WordsCounter = $"{_cardCategoryController.GetCategoryWordsCount(Category)} words";
             return Task.CompletedTask;
@@ -95,6 +97,7 @@ namespace FishKeyApp.ViewModels
 
             if (FlipBtnOpacity == 1)
             {
+                IsVisibleSpeaker = true;
                 Frame1ZIndex = 1;
                 Frame2ZIndex = 2;
                 ResultBtnsOpacity = 1;
@@ -118,6 +121,7 @@ namespace FishKeyApp.ViewModels
 
                 if (ResultBtnsOpacity == 1)
                 {
+                    IsVisibleSpeaker = false;
                     Frame1ZIndex = 2;
                     Frame2ZIndex = 1;
                     ResultBtnsOpacity = 0;
@@ -138,6 +142,7 @@ namespace FishKeyApp.ViewModels
             CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
             if (ResultBtnsOpacity == 1)
             {
+                IsVisibleSpeaker = false;
                 Frame1ZIndex = 2;
                 Frame2ZIndex = 1;
                 ResultBtnsOpacity = 0;
@@ -190,5 +195,8 @@ namespace FishKeyApp.ViewModels
 
         [ObservableProperty]
         int frame2ZIndex;
+
+        [ObservableProperty]
+        bool isVisibleSpeaker;
     }
 }
