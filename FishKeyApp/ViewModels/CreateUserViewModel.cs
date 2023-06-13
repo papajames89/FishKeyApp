@@ -16,8 +16,8 @@ namespace FishKeyApp.ViewModels
         {
             _databaseController = new DatabaseController();
             var test = FileSystem.Current.AppDataDirectory;
-            PageHeader = "My first name is";
-            Subtitle = "This is how your account will appear in FishKey app and you will not be able to change it";
+            PageHeader = "Podaj swoje imię";
+            Subtitle = "Tak będzie wyglądać Twoje konto w aplikacji FishKey app, po kliknięciu przycisku Utwórz, nie będziesz mógł zmienić tej nazwy.";
         }
         [RelayCommand]
         Task GoBack()

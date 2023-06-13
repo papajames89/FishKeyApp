@@ -17,8 +17,8 @@ namespace FishKeyApp.ViewModels
         {
             _databaseController = new DatabaseController();
             ListOfUsers = _databaseController.GetListOfUsers();
-            PageHeader = "Select your account";
-            Subtitle = "It is important to exercise caution when clicking the remove button, as this action cannot be reversed.";
+            PageHeader = "Wybierz swoje konto";
+            Subtitle = "Ważne jest, aby zachować ostrożność podczas klikania przycisku usuwania, ponieważ ta czynność nie może zostać cofnięta.";
         }
 
         [RelayCommand]

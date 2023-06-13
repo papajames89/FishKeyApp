@@ -63,8 +63,8 @@
 		<None Remove="Resources\CardCategories\b1.json" />
 		<None Remove="Resources\CardCategories\b2.json" />
 		<None Remove="Resources\CardCategories\Jedzenie i picie.json" />
-		<None Remove="Resources\CardCategories\Czesci ciala.json" />
 		<None Remove="Resources\CardCategories\Na lotnisku.json" />
+		<None Remove="Resources\CardCategories\Części ciała.json" />
 	  <None Remove="Resources\CardCategories\Kategoria testowa.json" />
 	</ItemGroup>
 
@@ -74,8 +74,8 @@
 		<EmbeddedResource Include="Resources\CardCategories\b1.json" />
 		<EmbeddedResource Include="Resources\CardCategories\b2.json" />
 		<EmbeddedResource Include="Resources\CardCategories\Jedzenie i picie.json" />
-		<EmbeddedResource Include="Resources\CardCategories\Czesci ciala.json" />
 		<EmbeddedResource Include="Resources\CardCategories\Na lotnisku.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Części ciała.json" />
 	  <EmbeddedResource Include="Resources\CardCategories\Kategoria testowa.json" />
 	</ItemGroup>
 

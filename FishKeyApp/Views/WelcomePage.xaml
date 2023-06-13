@@ -9,11 +9,6 @@
 
     <ContentPage.Content>
         <Grid>
-            <!--
-            <Image Source="login_page_background.jpg"
-                   BackgroundColor="White"
-                   Aspect="AspectFill" 
-                   Opacity="0.5"/> -->
             <Grid.Background>
                 <LinearGradientBrush StartPoint="1,0"
                                      EndPoint="0,1">
@@ -42,10 +37,11 @@
                        TextColor="White"
                        FontFamily="RobotoRegular"
                        HorizontalOptions="Center"
-                       Margin="0,0,0,15"/>
+                       HorizontalTextAlignment="Center"
+                       Margin="0,0,0,15" />
                 <Button
                     x:Name="createUser"
-                    Text="CREATE USER"
+                    Text="ZAŁÓŻ KONTO"
                     Opacity="1"
                     FontFamily="RobotoRegular"
                     FontSize="Small"
@@ -61,7 +57,7 @@
                     Padding="0"
                     Margin="0"/>
                 <Button x:Name="selectUser"
-                        Text="SIGN IN"
+                        Text="ZALOGUJ"
                         Opacity="1"
                         FontFamily="RobotoRegular"
                         FontSize="Small"

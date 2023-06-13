@@ -85,7 +85,7 @@
                 </CollectionView.ItemTemplate>
             </CollectionView>
 
-            <Button Text="REMOVE ALL USERS"
+            <Button Text="USUŃ WSZYSTKICH"
                     FontFamily="RobotoBold"
                     FontSize="14"
                     CornerRadius="30"
@@ -110,9 +110,10 @@
                             Opacity="0.3" />
                 </Button.Shadow>
             </Button>
-            
+
             <Label Text="{Binding Subtitle}"
                    HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
                    TextColor="Black"
                    Opacity="0.6"
                    FontSize="14"

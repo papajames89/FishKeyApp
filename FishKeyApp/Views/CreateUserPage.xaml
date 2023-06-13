@@ -32,10 +32,10 @@
                    HorizontalOptions="Center"
                    TextColor="Black"
                    Opacity="0.9"
-                   FontSize="40"
+                   FontSize="38"
                    Padding="0"
                    Margin="0,40,0,30"
-                   FontFamily="RobotoBold"/>
+                   FontFamily="RobotoBold" />
 
             <Border StrokeShape="RoundRectangle 5,5"
                     StrokeThickness="0.7"
@@ -43,7 +43,7 @@
                     BackgroundColor="Transparent"
                     Margin="30,0,30,0">
                 <controls:CustomEntry Text="{Binding UserName}"
-                                      Placeholder="Username"
+                                      Placeholder="Imię"
                                       FontSize="Micro"
                                       BackgroundColor="Transparent"
                                       TextColor="Black"
@@ -52,13 +52,14 @@
             </Border>
             <Label Text="{Binding Subtitle}"
                    HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
                    TextColor="Black"
                    Opacity="0.6"
                    FontSize="14"
                    MaximumWidthRequest="250"
                    Margin="0,50,0,30"
                    FontFamily="RobotoRegular" />
-            <Button Text="CREATE"
+            <Button Text="UTWÓRZ"
                     FontFamily="RobotoBold"
                     FontSize="14"
                     CornerRadius="30"

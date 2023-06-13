@@ -56,7 +56,7 @@ namespace FishKeyApp.ViewModels
             Frame2ZIndex = 1;
             IsVisibleSpeaker = false;
             IsBusy = false;
-            WordsCounter = $"{_cardCategoryController.GetCategoryWordsCount(Category)} words";
+            WordsCounter = $"{_cardCategoryController.GetCategoryWordsCount(Category)} słów";
             return Task.CompletedTask;
         }
 

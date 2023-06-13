@@ -36,7 +36,6 @@ namespace FishKeyApp.Controllers
             var user = new UserModel()
             {
                 Name = name,
-                Color = $"{name}.jpg",
                 KnownCards = new List<FlashCardModel>()
             };
 
@@ -74,7 +73,6 @@ namespace FishKeyApp.Controllers
 
         public UserModel UpdateUser(UserModel user, FlashCardModel card)
         {
-            bool test = user.KnownCards.Contains(card);
             if (user.KnownCards.Contains(card))
             {
                 return user;

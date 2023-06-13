@@ -54,6 +54,7 @@ namespace FishKeyApp.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
             }
             return string.Format(_localFile, fileName);
         }
@@ -80,6 +81,7 @@ namespace FishKeyApp.Controllers
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
             }
             return string.Format(_localFile, fileName);
         }

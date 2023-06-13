@@ -10,7 +10,7 @@ namespace FishKeyApp.ViewModels
     {
         public WelcomeViewModel()
         {
-            Subtitle = "By tapping Create User or Sign In, you agree to our Terms.";
+            Subtitle = "Klikaj¹c Za³ó¿ Konto lub Zaloguj, zgadzasz siê na warunki korzystania z aplikacji.";
         }
         [RelayCommand]
         Task GoToCreateUserPage() => Shell.Current.GoToAsync(nameof(CreateUserPage));

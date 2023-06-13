@@ -118,6 +118,7 @@
             </CollectionView>
             <Label Text="{Binding Subtitle}"
                    HorizontalOptions="Center"
+                   HorizontalTextAlignment="Center"
                    TextColor="Black"
                    Opacity="0.6"
                    FontSize="14"

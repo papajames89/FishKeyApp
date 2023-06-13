@@ -21,8 +21,8 @@ namespace FishKeyApp.ViewModels
             _databaseController = new DatabaseController();
             _currentContextModel = new CurrentContextModel() { Name = user };
             _cardCategoryController = new CardCategoryController();
-            PageHeader = "Select category";
-            Subtitle = "It is important to exercise caution when clicking the reset button, as this action cannot be reversed.";
+            PageHeader = "Wybierz kategorię";
+            Subtitle = "Ważne jest, aby zachować ostrożność podczas klikania przycisku reset, ponieważ ta czynność nie może zostać cofnięta.";
         }
 
         public Task InitAsync()
@@ -56,8 +56,8 @@ namespace FishKeyApp.ViewModels
                 },
                 new CategoryProgressModel()
                 {
-                    CategoryName = "Czesci ciala",
-                    ProgressValue = GetCategoryProgressLabel(User, "Czesci ciala")
+                    CategoryName = "Części ciała",
+                    ProgressValue = GetCategoryProgressLabel(User, "Części ciała")
                 },
                 new CategoryProgressModel()
                 {

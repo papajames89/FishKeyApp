@@ -40,8 +40,8 @@ namespace FishKeyApp.Controllers
                     return GetCategory("b1");
                 case "B2":
                     return GetCategory("b2");
-                case "Czesci ciala":
-                    return GetCategory("Czesci ciala");
+                case "Części ciała":
+                    return GetCategory("Części ciała");
                 case "Na lotnisku":
                     return GetCategory("Na lotnisku");
                 case "Jedzenie i picie":

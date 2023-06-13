@@ -61,7 +61,6 @@ namespace FishKeyApp
             builder.Services.AddTransient<SelectUserPage>();
             builder.Services.AddTransient<DashboardPage>();
             builder.Services.AddTransient<FlashCardPage>();
-
             builder.Services.AddTransient<WelcomeViewModel>();
             builder.Services.AddTransient<CreateUserViewModel>();
             builder.Services.AddTransient<SelectUserViewModel>();

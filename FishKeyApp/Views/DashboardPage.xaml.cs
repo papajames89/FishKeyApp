@@ -1,5 +1,7 @@
 ﻿using FishKeyApp.ViewModels;
+#if ANDROID
 using Java.Lang;
+#endif
 
 namespace FishKeyApp.Views
 {
