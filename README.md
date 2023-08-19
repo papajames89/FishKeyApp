@@ -7,6 +7,7 @@ App is an application that enables English language learning using flashcards. I
 ## Authors
 
 - [@papajames89](https://www.github.com/papajames89)
+- [@LinkedIn](https://www.linkedin.com/in/grzegorz-rzeszut/)
 
 
 ## Features
