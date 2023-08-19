@@ -2,48 +2,76 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
+             xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
              x:Class="FishKeyApp.Views.WelcomePage"
              x:DataType="viewmodel:WelcomeViewModel"
              Shell.NavBarIsVisible="False">
-    
+
     <ContentPage.Content>
         <Grid>
-            <Image Source="login_page_background.jpg"
-                   Aspect="AspectFill" />
-            <Image
-                x:Name="fishkeyLogo"
-                Opacity="1"
-                Source="fishkey_logo.png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <Grid.Background>
+                <LinearGradientBrush StartPoint="1,0"
+                                     EndPoint="0,1">
+                    <GradientStop Color="#fbb040"
+                                  Offset="0.3" />
+                    <GradientStop Color="#ef4136"
+                                  Offset="1" />
+                </LinearGradientBrush>
+            </Grid.Background>
+            <Image x:Name="fishkeyLogo"
+                   Opacity="1"
+                   Source="fishkey_logo_obrys.png"
+                   HeightRequest="200"
+                   HorizontalOptions="Center" />
             <VerticalStackLayout
-                Spacing="25"
-                Padding="30,0"
+                Spacing="15"
+                Padding="10,0"
                 VerticalOptions="End">
+                <Label Text="FishKey App"
+                       TextColor="White"
+                       FontFamily="RobotoBold"
+                       FontSize="Title"
+                       HorizontalOptions="Center"
+                       Margin="0,0,0,15" />
+                <Label Text="{Binding Subtitle}"
+                       TextColor="White"
+                       FontFamily="RobotoRegular"
+                       HorizontalOptions="Center"
+                       HorizontalTextAlignment="Center"
+                       Margin="0,0,0,15" />
                 <Button
                     x:Name="createUser"
-                    Text="Create"
+                    Text="ZAŁÓŻ KONTO"
                     Opacity="1"
-                    FontSize="Medium"
+                    FontFamily="RobotoRegular"
+                    FontSize="Small"
                     SemanticProperties.Hint="Enters Create User Page"
                     Command="{Binding GoToCreateUserPageCommand}"
                     WidthRequest="150"
                     HorizontalOptions="Center"
-                    BackgroundColor="#02CBA3"
-                    CornerRadius="30"/>
-                <Button
-                    x:Name="selectUser"
-                    Text="Select"
-                    Opacity="1"
-                    FontSize="Medium"
-                    SemanticProperties.Hint="Enters Select User Page"
-                    Command="{Binding GoToSelectUserPageCommand}"
-                    WidthRequest="150"
-                    HorizontalOptions="Center"
-                    Margin="0,0,0,150"
-                    BackgroundColor="#E3A300"
-                    CornerRadius="30"/>
+                    BackgroundColor="Transparent"
+                    BorderColor="White"
+                    BorderWidth="1"
+                    CornerRadius="30"
+                    HeightRequest="30"
+                    Padding="0"
+                    Margin="0"/>
+                <Button x:Name="selectUser"
+                        Text="ZALOGUJ"
+                        Opacity="1"
+                        FontFamily="RobotoRegular"
+                        FontSize="Small"
+                        SemanticProperties.Hint="Enters Select User Page"
+                        Command="{Binding GoToSelectUserPageCommand}"
+                        WidthRequest="150"
+                        HorizontalOptions="Center"
+                        Margin="0,0,0,150"
+                        BackgroundColor="Transparent"
+                        BorderColor="White"
+                        BorderWidth="1"
+                        CornerRadius="30"
+                        HeightRequest="30"
+                        Padding="0" />
             </VerticalStackLayout>
         </Grid>
     </ContentPage.Content>

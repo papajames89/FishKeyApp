@@ -2,51 +2,203 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
+             xmlns:maui="clr-namespace:epj.RadialDial.Maui;assembly=epj.RadialDial.Maui"
              x:Class="FishKeyApp.Views.FlashCardPage"
              Shell.NavBarIsVisible="False"
-             x:DataType="viewmodel:FlashCardViewModel">
-    
-    <VerticalStackLayout>
-        <Button
-            x:Name="BackBtn"
-            Text="Go Back"
-            SemanticProperties.Hint="Go to previous page button"
-            Command="{Binding GoBackCommand}"
-            HorizontalOptions="Center" />
-        <Button 
-            Text="{Binding CurrentContext.Name}"
-            Opacity="1"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Image
-            x:Name="FlashcardImg"
-            Opacity="1"
-            Source="{Binding ImgUrl}"
-            SemanticProperties.Description="Cute dot net bot waving hi to you!"
-            HeightRequest="200"/>
-        <Button
-            x:Name="SoundBtn"
-            Text="Play sound"
-            SemanticProperties.Hint="Play sound of a flashcard"
-            Command="{Binding PlayAudioCommand}"/>
-        <Button
-            x:Name="FlipBtn"
-            Text="Flip flashcard"
-            Opacity="{Binding FlipBtnOpacity}"
-            x:FieldModifier="Public"
-            SemanticProperties.Hint="Flip the flashcard"
-            Command="{Binding FlipCommand}"/>
-        <Button
-            x:Name="YesBtn"
-            Text="YES"
-            Opacity="{Binding YesBtnOpacity}"
-            SemanticProperties.Hint="I knew flashcard"
-            Command="{Binding YesCommand}"/>
-        <Button
-            x:Name="NoBtn"
-            Text="NO"
-            Opacity="{Binding NoBtnOpacity}"
-            SemanticProperties.Hint="I didn't knew flashcard"
-            Command="{Binding NoCommand}"/>
-    </VerticalStackLayout>
+             x:DataType="viewmodel:FlashCardViewModel"
+             Appearing="Page_Appearing">
+
+    <Grid Margin="0,50,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*" />
+            <ColumnDefinition Width="6*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+        
+        <VerticalStackLayout>
+            <ImageButton Source="chevron_left.png"
+                         MaximumHeightRequest="30"
+                         Grid.Column="0"
+                         Margin="20,35,0,0"
+                         Opacity="0.5"
+                         Command="{Binding GoBackCommand}" />
+        </VerticalStackLayout>
+
+        
+        <VerticalStackLayout HorizontalOptions="Center"
+                             VerticalOptions="Start"
+                             Grid.Column="1">
+            <Image Source="fishkey_logo.png"
+                   MaximumHeightRequest="100" />
+        </VerticalStackLayout>
+
+        <Frame Grid.ColumnSpan="3"
+               BackgroundColor="#f6f6f6"
+               CornerRadius="30"
+               Margin="10,0,10,0"
+               HeightRequest="580">
+            <VerticalStackLayout>
+                <Label Text="{Binding Category}"
+                       Margin="0,20,0,0"
+                       HorizontalOptions="Center"
+                       TextColor="Black"
+                       Opacity="0.8"
+                       FontSize="30"
+                       FontFamily="RobotoBold" />
+                <Label Text="{Binding WordsCounter}"
+                       VerticalOptions="Start"
+                       HorizontalOptions="Center"
+                       Padding="0"
+                       TextColor="Black"
+                       Opacity="0.6"
+                       FontSize="15"
+                       FontFamily="RobotoBold" />
+                <ProgressBar ProgressColor="#47c690"
+                             WidthRequest="100"
+                             VerticalOptions="Start"
+                             HorizontalOptions="Center"
+                             Progress="{Binding ProgressValue}" />
+                <Frame BackgroundColor="#4f42d8"
+                       Margin="0,20,0,0"
+                       Padding="0,0,0,30"
+                       CornerRadius="30"
+                       HasShadow="True">
+                    <VerticalStackLayout>
+                        <Frame BackgroundColor="Black"
+                               CornerRadius="30"
+                               Margin="0"
+                               Padding="0">
+                            <Image x:Name="FlashcardImg"
+                                   Opacity="1"
+                                   Margin="0"
+                                   Aspect="AspectFit"
+                                   Source="{Binding ImgUrl}"
+                                   SemanticProperties.Description="Cute dot net bot waving hi to you!" />
+                        </Frame>
+                        <Label x:Name="CardLabel"
+                               Margin="20,20,20,0"
+                               HorizontalTextAlignment="Center"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               FontSize="Large"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               Text="{Binding CardLabel}" />
+                        <ImageButton Source="speaker2.png"
+                                     WidthRequest="30"
+                                     HeightRequest="30"
+                                     Margin="0,20,0,0"
+                                     IsVisible="{Binding IsVisibleSpeaker}"
+                                     Command="{Binding PlayAudioCommand}"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </VerticalStackLayout>
+            
+        </Frame>
+        <Frame Grid.ColumnSpan="3"
+               HeightRequest="100"
+               BackgroundColor="Transparent"
+               Padding="0"
+               VerticalOptions="End"
+               Margin="0,0,0,60"
+               ZIndex="{Binding Frame1ZIndex}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <ImageButton Source="eye_closed.png"
+                             Grid.Column="2"
+                             HeightRequest="70"
+                             Opacity="{Binding FlipBtnOpacity}"
+                             x:FieldModifier="Public"
+                             SemanticProperties.Hint="Flip the flashcard"
+                             Command="{Binding FlipCommand}">
+                    <ImageButton.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="5,5"
+                                Radius="30"
+                                Opacity="0.3" />
+                    </ImageButton.Shadow>
+                </ImageButton>
+                <ImageButton Source="ok_grey.png"
+                             Grid.Column="3"
+                             HeightRequest="60"
+                             Opacity="{Binding FlipBtnOpacity}">
+                    <ImageButton.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="5,5"
+                                Radius="30"
+                                Opacity="0.3" />
+                    </ImageButton.Shadow>
+                </ImageButton>
+                <ImageButton Source="not_ok_grey.png"
+                             Grid.Column="1"
+                             HeightRequest="60"
+                             Opacity="{Binding FlipBtnOpacity}">
+                    <ImageButton.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="5,5"
+                                Radius="30"
+                                Opacity="0.3" />
+                    </ImageButton.Shadow>
+                </ImageButton>
+            </Grid>
+        </Frame>
+        <Frame Grid.ColumnSpan="3"
+               HeightRequest="100"
+               BackgroundColor="Transparent"
+               Padding="0"
+               VerticalOptions="End"
+               Margin="0,0,0,60"
+               ZIndex="{Binding Frame2ZIndex}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                    <ColumnDefinition Width="1*" />
+                </Grid.ColumnDefinitions>
+                <ImageButton Source="eye_open.png"
+                             Grid.Column="2"
+                             HeightRequest="70"
+                             Opacity="1">
+                    <ImageButton.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="5,5"
+                                Radius="30"
+                                Opacity="0.3" />
+                    </ImageButton.Shadow>
+                </ImageButton>
+                <ImageButton Source="ok_green.png"
+                             Grid.Column="3"
+                             HeightRequest="60"
+                             Opacity="1"
+                             Command="{Binding YesCommand}">
+                    <ImageButton.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="5,5"
+                                Radius="30"
+                                Opacity="0.3" />
+                    </ImageButton.Shadow>
+                </ImageButton>
+                <ImageButton Source="not_ok_red.png"
+                             Grid.Column="1"
+                             HeightRequest="60"
+                             Opacity="1"
+                             Command="{Binding NoCommand}">
+                    <ImageButton.Shadow>
+                        <Shadow Brush="Black"
+                                Offset="5,5"
+                                Radius="30"
+                                Opacity="0.3" />
+                    </ImageButton.Shadow>
+                </ImageButton>
+            </Grid>
+        </Frame>
+    </Grid>
 </ContentPage>

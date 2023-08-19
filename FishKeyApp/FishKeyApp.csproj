@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android<!--;net7.0-ios;net7.0-maccatalyst --></TargetFrameworks>
+		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
 		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
 		<!-- <TargetFrameworks>$(TargetFrameworks);net7.0-tizen</TargetFrameworks> -->
 		<OutputType>Exe</OutputType>
@@ -29,12 +29,21 @@
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'tizen'">6.5</SupportedOSPlatformVersion>
 	</PropertyGroup>
 
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android|AnyCPU'">
+	  <PublishTrimmed>False</PublishTrimmed>
+	  <RunAOTCompilation>False</RunAOTCompilation>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="Resources\Splash\splash.svg" />
+	</ItemGroup>
+	
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#ffffff" BaseSize="100,100" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#ffffff" BaseSize="168,208" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />
@@ -48,9 +57,33 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Platforms\Android\Resources\drawable\maui_splash.xml" />
+	  <None Remove="Resources\CardCategories\a1.json" />
+		<None Remove="Resources\CardCategories\a2.json" />
+		<None Remove="Resources\CardCategories\b1.json" />
+		<None Remove="Resources\CardCategories\b2.json" />
+		<None Remove="Resources\CardCategories\Jedzenie i picie.json" />
+		<None Remove="Resources\CardCategories\Na lotnisku.json" />
+		<None Remove="Resources\CardCategories\Części ciała.json" />
+	  <None Remove="Resources\CardCategories\Kategoria testowa.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\CardCategories\a1.json" />
+		<EmbeddedResource Include="Resources\CardCategories\a2.json" />
+		<EmbeddedResource Include="Resources\CardCategories\b1.json" />
+		<EmbeddedResource Include="Resources\CardCategories\b2.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Jedzenie i picie.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Na lotnisku.json" />
+		<EmbeddedResource Include="Resources\CardCategories\Części ciała.json" />
+	  <EmbeddedResource Include="Resources\CardCategories\Kategoria testowa.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="CommunityToolkit.Maui" Version="5.1.0" />
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.1.0" />
+		<PackageReference Include="epj.RadialDial.Maui" Version="1.0.0" />
 		<PackageReference Include="FirebaseStorage.net" Version="1.0.3" />
-		<PackageReference Include="FireSharp.Serialization.JsonNet" Version="1.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
 		<PackageReference Include="Microsoft.Maui.Dependencies" Version="6.0.552" />
 		<PackageReference Include="Microsoft.Maui.Extensions" Version="6.0.552" />

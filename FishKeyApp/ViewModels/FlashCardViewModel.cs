@@ -3,132 +3,84 @@ using CommunityToolkit.Mvvm.Input;
 using FishKeyApp.Models;
 using Plugin.Maui.Audio;
 using FishKeyApp.Controllers;
-using Android.Media;
-using Java.Net;
 
 namespace FishKeyApp.ViewModels
 {
     [QueryProperty(nameof(Category), nameof(Category))]
     [QueryProperty(nameof(ImgUrl), nameof(ImgUrl))]
+    [QueryProperty(nameof(CardLabel), nameof(CardLabel))]
     [QueryProperty(nameof(CurrentContext), nameof(CurrentContext))]
+    [QueryProperty(nameof(CurrentUser), nameof(CurrentUser))]
+    [QueryProperty(nameof(CurrentFlashCard), nameof(CurrentFlashCard))]
     [QueryProperty(nameof(FlipBtnOpacity), nameof(FlipBtnOpacity))]
-    [QueryProperty(nameof(YesBtnOpacity), nameof(YesBtnOpacity))]
-    [QueryProperty(nameof(NoBtnOpacity), nameof(NoBtnOpacity))]
+    [QueryProperty(nameof(ResultBtnsOpacity), nameof(ResultBtnsOpacity))]
+    [QueryProperty(nameof(IsBusy), nameof(IsBusy))]
+    [QueryProperty(nameof(ProgressValue), nameof(ProgressValue))]
+    [QueryProperty(nameof(ProgressValuePercentage), nameof(ProgressValuePercentage))]
+    [QueryProperty(nameof(CardHeightRequest), nameof(CardHeightRequest))]
+    [QueryProperty(nameof(WordsCounter), nameof(WordsCounter))]
+    [QueryProperty(nameof(Frame1ZIndex), nameof(Frame1ZIndex))]
+    [QueryProperty(nameof(Frame2ZIndex), nameof(Frame2ZIndex))]
+    [QueryProperty(nameof(IsVisibleSpeaker), nameof(IsVisibleSpeaker))]
 
     public partial class FlashCardViewModel : ObservableObject
     {
         private readonly FtpController _ftpController;
         private readonly AudioPlayerController _audioPlayerController;
-        private readonly IAudioManager audioManager;
-        protected IAudioPlayer player = null;       // media player
-        protected FileStream stream = null;         // stream used for playing
-        private MediaState mediaState;
+        private readonly DatabaseController _databaseController;
+        private readonly CardCategoryController _cardCategoryController;
+        private int _cardHeightRequest = 300;
 
         public FlashCardViewModel(IAudioManager audioManager)
         {
-            this.audioManager= audioManager;
-            //_audioPlayerController = new AudioPlayerController(audioManager);
+            _audioPlayerController = new AudioPlayerController(audioManager);
+            _databaseController = new DatabaseController();
+            _cardCategoryController = new CardCategoryController();
             _ftpController = new FtpController();
-            FlipBtnOpacity = 1;
-            YesBtnOpacity = 0;
-            NoBtnOpacity = 0;
-            SetUp();
+            IsBusy = false;
         }
 
-        private void SetUp()
+        public Task InitAsync()
         {
-            ImgUrl = _ftpController.DownloadImgFile("back.jpg");
+            CurrentUser = _databaseController.GetUser(CurrentContext.Name);
+            CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
+            CardLabel = CurrentFlashCard.Polish;
+            ProgressValue = _cardCategoryController.GetCategoryProgress(CurrentUser, Category);
+            ProgressValuePercentage = $"{(Int16)(ProgressValue*100)} %";
+            CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
+            ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
+            _ftpController.DownloadMp3File(CurrentFlashCard.Mp3Url);
+            FlipBtnOpacity = 1;
+            ResultBtnsOpacity = 0;
+            Frame1ZIndex = 2;
+            Frame2ZIndex = 1;
+            IsVisibleSpeaker = false;
+            IsBusy = false;
+            WordsCounter = $"{_cardCategoryController.GetCategoryWordsCount(Category)} słów";
+            return Task.CompletedTask;
+        }
+
+        private int GetCardHeightRequest(int sentenceLenght)
+        {
+            if (sentenceLenght > 30)
+            {
+                return 320;
+            }
+            else return _cardHeightRequest;
+        }
+
+        private async Task UpdateCurrentCard()
+        {
+            CurrentFlashCard = _cardCategoryController.GetRandomFlashCard(CurrentUser, Category);
+            ImgUrl = _ftpController.DownloadImgFile(CurrentFlashCard.ImgUrl);
+            await _ftpController.DownloadMp3FileAsync(CurrentFlashCard.Mp3Url);
+            CardLabel = CurrentFlashCard.Polish;
         }
 
         [RelayCommand]
-        private async Task PlayAudio()
+        private void PlayAudio()
         {
-            // ignore if we're already playing
-            //if (mediaState == MediaState.Playing)
-            //{
-            //    //StopAudio();
-            //    return;
-            //}
-            //string url = "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba.mp3";
-
-            //try
-            //{
-            //    // This is where we are storing local audio files
-            //    string cacheDir = FileSystem.Current.CacheDirectory;
-
-
-            //    // get the fully qualified path to the local file
-            //    var localFile = $"{cacheDir}\\{Path.GetFileName(url)}";
-
-            //    // download if need be
-            //    if (!File.Exists(localFile))
-            //    {
-            //        // this code downloads the file from the URL
-            //        using (var client = new HttpClient())
-            //        {
-            //            var uri = new Uri(url);
-            //            var response = await client.GetAsync(url);
-            //            response.EnsureSuccessStatusCode();
-            //            using (var stream = await response.Content.ReadAsStreamAsync())
-            //            {
-            //                var fileInfo = new FileInfo(localFile);
-            //                using (var fileStream = fileInfo.OpenWrite())
-            //                {
-            //                    await stream.CopyToAsync(fileStream);
-            //                }
-            //            }
-            //        }
-            //    }
-
-            //    // File exists now. Read it
-            //    stream = File.OpenRead(localFile);
-
-            //    // create the audio player
-            //    player = audioManager.CreatePlayer(stream);
-
-            //    // start playing
-            //    player.Play();
-
-
-            //}
-            //catch (Exception e)
-            //{
-            //}
-
-
-
-
-            // here we go!
-            try
-            {
-                // This is where we are storing local audio files
-                string cacheDir = FileSystem.Current.CacheDirectory;
-
-                // get the fully qualified path to the local file
-                var localFile = $"{cacheDir}\\body.mp3";
-
-                // download if need
-                if (!File.Exists(localFile))
-                {
-                    _ftpController.DownloadMp3File("body.mp3");
-                }
-
-                var exist = File.Exists(localFile);
-
-                // File exists now. Read it
-                stream = File.OpenRead(localFile);
-
-                // create the audio player
-                player = audioManager.CreatePlayer(stream);
-
-                // start playing
-                player.Play();
-                // configure the UI for playing
-                mediaState = MediaState.Playing;
-            }
-            catch (Exception e)
-            {
-            }
+            _audioPlayerController.PlayAudio(CurrentFlashCard.Mp3Url);
         }
 
         [RelayCommand]
@@ -137,34 +89,63 @@ namespace FishKeyApp.ViewModels
         [RelayCommand]
         void Flip()
         {
+            if (CardLabel == CurrentFlashCard.Polish)
+            {
+                CardLabel = CurrentFlashCard.English;
+                CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
+            }
+
             if (FlipBtnOpacity == 1)
             {
-                YesBtnOpacity = 1;
-                NoBtnOpacity = 1;
+                IsVisibleSpeaker = true;
+                Frame1ZIndex = 1;
+                Frame2ZIndex = 2;
+                ResultBtnsOpacity = 1;
                 FlipBtnOpacity = 0;
             }
             else return;
         }
 
         [RelayCommand]
-        void Yes()
+        async Task Yes()
         {
-            if (YesBtnOpacity == 1)
+            IsBusy = true;
+            try
             {
-                YesBtnOpacity = 0;
-                NoBtnOpacity = 0;
-                FlipBtnOpacity = 1;
+                CurrentUser = _databaseController.UpdateUser(CurrentUser, CurrentFlashCard);
+                _databaseController.SaveUser(CurrentUser);
+                ProgressValue = _cardCategoryController.GetCategoryProgress(CurrentUser, Category);
+                ProgressValuePercentage = $"{(Int16)(ProgressValue * 100)} %";
+                await UpdateCurrentCard();
+                CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
+
+                if (ResultBtnsOpacity == 1)
+                {
+                    IsVisibleSpeaker = false;
+                    Frame1ZIndex = 2;
+                    Frame2ZIndex = 1;
+                    ResultBtnsOpacity = 0;
+                    FlipBtnOpacity = 1;
+                }
+                else return;
             }
-            else return;
+            catch (Exception e)
+            {
+            }
+            finally { IsBusy = false; }
         }
 
         [RelayCommand]
-        void No()
+        async Task No()
         {
-            if (NoBtnOpacity == 1)
+            await UpdateCurrentCard();
+            CardHeightRequest = GetCardHeightRequest(CardLabel.Length);
+            if (ResultBtnsOpacity == 1)
             {
-                YesBtnOpacity = 0;
-                NoBtnOpacity = 0;
+                IsVisibleSpeaker = false;
+                Frame1ZIndex = 2;
+                Frame2ZIndex = 1;
+                ResultBtnsOpacity = 0;
                 FlipBtnOpacity = 1;
             }
             else return;
@@ -177,15 +158,45 @@ namespace FishKeyApp.ViewModels
         string category;
 
         [ObservableProperty]
+        string cardLabel;
+
+        [ObservableProperty]
         int flipBtnOpacity;
 
         [ObservableProperty]
-        int yesBtnOpacity;
-
-        [ObservableProperty]
-        int noBtnOpacity;
+        int resultBtnsOpacity;
 
         [ObservableProperty]
         CurrentContextModel currentContext;
+
+        [ObservableProperty]
+        UserModel currentUser;
+
+        [ObservableProperty]
+        FlashCardModel currentFlashCard;
+
+        [ObservableProperty]
+        bool isBusy;
+
+        [ObservableProperty]
+        double progressValue;
+
+        [ObservableProperty]
+        string progressValuePercentage;
+
+        [ObservableProperty]
+        int cardHeightRequest;
+
+        [ObservableProperty]
+        string wordsCounter;
+
+        [ObservableProperty]
+        int frame1ZIndex;
+
+        [ObservableProperty]
+        int frame2ZIndex;
+
+        [ObservableProperty]
+        bool isVisibleSpeaker;
     }
 }

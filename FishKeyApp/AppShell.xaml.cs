@@ -1,4 +1,5 @@
-﻿using FishKeyApp.Views;
+﻿using FishKeyApp.ViewModels;
+using FishKeyApp.Views;
 
 namespace FishKeyApp
 {

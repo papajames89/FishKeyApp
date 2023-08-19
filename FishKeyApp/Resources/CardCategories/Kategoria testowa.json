@@ -1,0 +1,42 @@
+﻿[
+  {
+    "id": 383,
+    "category": "Kategoria testowa",
+    "polish": "zwierzę domowe",
+    "english": "pet",
+    "mp3Url": "pet.mp3",
+    "imgUrl": "pet.jpg"
+  },
+  {
+    "id": 384,
+    "category": "Kategoria testowa",
+    "polish": "dzwonić, telefonować",
+    "english": "phone",
+    "mp3Url": "phone.mp3",
+    "imgUrl": "phone-1.jpg"
+  },
+  {
+    "id": 385,
+    "category": "Kategoria testowa",
+    "polish": "telefon",
+    "english": "phone",
+    "mp3Url": "phone.mp3",
+    "imgUrl": "phone.jpg"
+  },
+  {
+    "id": 386,
+    "category": "Kategoria testowa",
+    "polish": "zdjęcie",
+    "english": "photo",
+    "mp3Url": "photo.mp3",
+    "imgUrl": "photo.jpg"
+  },
+  {
+    "id": 387,
+    "category": "Kategoria testowa",
+    "polish": "piknik",
+    "english": "picnic",
+    "mp3Url": "picnic.mp3",
+    "imgUrl": "picnic.jpg"
+  }
+]

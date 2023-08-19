@@ -4,7 +4,8 @@ namespace FishKeyApp.Views;
 
 public partial class SelectUserPage : ContentPage
 {
-	public SelectUserPage(SelectUserViewModel vm)
+    public readonly SelectUserViewModel _selectUserViewModel;
+    public SelectUserPage(SelectUserViewModel vm)
 	{
 		InitializeComponent();
 		BindingContext = vm;

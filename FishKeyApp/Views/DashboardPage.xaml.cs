@@ -1,12 +1,27 @@
 ﻿using FishKeyApp.ViewModels;
+#if ANDROID
+using Java.Lang;
+#endif
 
-namespace FishKeyApp.Views;
-
-public partial class DashboardPage : ContentPage
+namespace FishKeyApp.Views
 {
-    public DashboardPage(DashboardViewModel vm)
+    public partial class DashboardPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = vm;
+        public DashboardPage(DashboardViewModel vm)
+        {
+            InitializeComponent();
+            BindingContext = vm;
+        }
+
+        private async void Page_Appearing(object sender, EventArgs e)
+        {
+            base.OnAppearing();
+
+
+            if (BindingContext != null && BindingContext is DashboardViewModel vm)
+            {
+                await vm.InitAsync();
+            }
+        }
     }
 }
