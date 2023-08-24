@@ -51,22 +51,22 @@ namespace FishKeyApp.ViewModels
                 },
                 new CategoryProgressModel()
                 {
-                    CategoryName = "Na lotnisku",
+                    CategoryName = "At the airport",
                     ProgressValue = GetCategoryProgressLabel(User, "Na lotnisku")
                 },
                 new CategoryProgressModel()
                 {
-                    CategoryName = "Czesci ciala",
+                    CategoryName = "Body parts",
                     ProgressValue = GetCategoryProgressLabel(User, "Czesci ciala")
                 },
                 new CategoryProgressModel()
                 {
-                    CategoryName = "Jedzenie i picie",
+                    CategoryName = "Food and drinks",
                     ProgressValue = GetCategoryProgressLabel(User, "Jedzenie i picie")
                 },
                 new CategoryProgressModel()
                 {
-                    CategoryName = "Kategoria testowa",
+                    CategoryName = "Test category",
                     ProgressValue = GetCategoryProgressLabel(User, "Kategoria testowa")
                 }
             };
