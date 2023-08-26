@@ -6,37 +6,33 @@
              x:Class="FishKeyApp.Views.FlashCardPage"
              Shell.NavBarIsVisible="False"
              x:DataType="viewmodel:FlashCardViewModel"
-             Appearing="Page_Appearing">
-
-    <Grid Margin="0,50,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        
-        <VerticalStackLayout>
-            <ImageButton Source="chevron_left.png"
-                         MaximumHeightRequest="30"
-                         Grid.Column="0"
-                         Margin="20,35,0,0"
-                         Opacity="0.5"
-                         Command="{Binding GoBackCommand}" />
-        </VerticalStackLayout>
-
+             Appearing="Page_Appearing"
+             BackgroundColor="White">
+    
+    <Grid Margin="0,50,0,0"
+          ColumnDefinitions="1*,6*,1*"
+          RowDefinitions="4*,19*,3*">
         
         <VerticalStackLayout HorizontalOptions="Center"
                              VerticalOptions="Start"
-                             Grid.Column="1">
+                             Grid.Column="1"
+                             Grid.Row="0">
             <Image Source="fishkey_logo.png"
                    MaximumHeightRequest="100" />
         </VerticalStackLayout>
 
         <Frame Grid.ColumnSpan="3"
+               Grid.Row="1"
                BackgroundColor="#f6f6f6"
                CornerRadius="30"
-               Margin="10,0,10,0"
-               HeightRequest="580">
+               Margin="10,0,10,0">
+            <Frame.Shadow>
+                <Shadow
+                    Brush="Black"
+                    Offset="2,4"
+                    Radius="5"
+                    Opacity="0.5"/>
+            </Frame.Shadow>
             <VerticalStackLayout>
                 <Label Text="{Binding Category}"
                        Margin="0,20,0,0"
@@ -62,16 +58,19 @@
                        Margin="0,20,0,0"
                        Padding="0,0,0,30"
                        CornerRadius="30"
-                       HasShadow="True">
+                       HasShadow="False">
                     <VerticalStackLayout>
-                        <Frame BackgroundColor="Black"
+                        <Frame BackgroundColor="Pink"
                                CornerRadius="30"
                                Margin="0"
-                               Padding="0">
+                               Padding="0"
+                               HeightRequest="200"
+                               HasShadow="False"
+                               IsClippedToBounds="True">
                             <Image x:Name="FlashcardImg"
                                    Opacity="1"
                                    Margin="0"
-                                   Aspect="AspectFit"
+                                   Aspect="AspectFill"
                                    Source="{Binding ImgUrl}"
                                    SemanticProperties.Description="Cute dot net bot waving hi to you!" />
                         </Frame>
@@ -96,79 +95,59 @@
             
         </Frame>
         <Frame Grid.ColumnSpan="3"
-               HeightRequest="100"
+               Grid.Row="2"
                BackgroundColor="Transparent"
                Padding="0"
-               VerticalOptions="End"
-               Margin="0,0,0,60"
-               ZIndex="{Binding Frame1ZIndex}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
+               VerticalOptions="Start"
+               Margin="0,-35,0,0"
+               ZIndex="{Binding Frame1ZIndex}"
+               HasShadow="False">
+            <Grid
+                ColumnDefinitions="1*,1*,1*,1*,1*">
+                
                 <ImageButton Source="eye_closed.png"
                              Grid.Column="2"
                              HeightRequest="70"
                              Opacity="{Binding FlipBtnOpacity}"
-                             x:FieldModifier="Public"
                              SemanticProperties.Hint="Flip the flashcard"
                              Command="{Binding FlipCommand}">
-                    <ImageButton.Shadow>
-                        <Shadow Brush="Black"
-                                Offset="5,5"
-                                Radius="30"
-                                Opacity="0.3" />
-                    </ImageButton.Shadow>
                 </ImageButton>
                 <ImageButton Source="ok_grey.png"
                              Grid.Column="3"
                              HeightRequest="60"
                              Opacity="{Binding FlipBtnOpacity}">
-                    <ImageButton.Shadow>
-                        <Shadow Brush="Black"
-                                Offset="5,5"
-                                Radius="30"
-                                Opacity="0.3" />
-                    </ImageButton.Shadow>
                 </ImageButton>
                 <ImageButton Source="not_ok_grey.png"
                              Grid.Column="1"
                              HeightRequest="60"
                              Opacity="{Binding FlipBtnOpacity}">
-                    <ImageButton.Shadow>
-                        <Shadow Brush="Black"
-                                Offset="5,5"
-                                Radius="30"
-                                Opacity="0.3" />
-                    </ImageButton.Shadow>
                 </ImageButton>
             </Grid>
         </Frame>
         <Frame Grid.ColumnSpan="3"
-               HeightRequest="100"
+               Grid.Row="2"
                BackgroundColor="Transparent"
                Padding="0"
-               VerticalOptions="End"
-               Margin="0,0,0,60"
+               VerticalOptions="Start"
+               Margin="0,-35,0,0"
                ZIndex="{Binding Frame2ZIndex}">
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                    <ColumnDefinition Width="1*" />
-                </Grid.ColumnDefinitions>
+            <Frame.Shadow>
+                <Shadow
+                    Brush="Black"
+                    Offset="2,4"
+                    Radius="5"
+                    Opacity="0.5"/>
+            </Frame.Shadow>
+            <Grid
+                ColumnDefinitions="1*,1*,1*,1*,1*">
+
                 <ImageButton Source="eye_open.png"
                              Grid.Column="2"
                              HeightRequest="70"
-                             Opacity="1">
+                             Opacity="1"
+                             IsEnabled="False">
                     <ImageButton.Shadow>
-                        <Shadow Brush="Black"
+                        <Shadow Brush="Gray"
                                 Offset="5,5"
                                 Radius="30"
                                 Opacity="0.3" />
@@ -180,7 +159,7 @@
                              Opacity="1"
                              Command="{Binding YesCommand}">
                     <ImageButton.Shadow>
-                        <Shadow Brush="Black"
+                        <Shadow Brush="Gray"
                                 Offset="5,5"
                                 Radius="30"
                                 Opacity="0.3" />
@@ -192,7 +171,7 @@
                              Opacity="1"
                              Command="{Binding NoCommand}">
                     <ImageButton.Shadow>
-                        <Shadow Brush="Black"
+                        <Shadow Brush="Gray"
                                 Offset="5,5"
                                 Radius="30"
                                 Opacity="0.3" />

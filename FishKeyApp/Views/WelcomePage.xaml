@@ -3,17 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodel="clr-namespace:FishKeyApp.ViewModels"
              xmlns:mct="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+             xmlns:ios="clr-namespace:Microsoft.Maui.Controls.PlatformConfiguration.iOSSpecific;assembly=Microsoft.Maui.Controls"
+             ios:Page.UseSafeArea="False"
              x:Class="FishKeyApp.Views.WelcomePage"
              x:DataType="viewmodel:WelcomeViewModel"
              Shell.NavBarIsVisible="False">
+    <Page.Behaviors>
+        <mct:StatusBarBehavior StatusBarStyle="DarkContent" />
+    </Page.Behaviors>
 
     <ContentPage.Content>
         <Grid>
-            <!--
-            <Image Source="login_page_background.jpg"
-                   BackgroundColor="White"
-                   Aspect="AspectFill" 
-                   Opacity="0.5"/> -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="1*" />
+            </Grid.RowDefinitions>
             <Grid.Background>
                 <LinearGradientBrush StartPoint="1,0"
                                      EndPoint="0,1">
@@ -24,14 +31,17 @@
                 </LinearGradientBrush>
             </Grid.Background>
             <Image x:Name="fishkeyLogo"
+                   Grid.Row="2"
                    Opacity="1"
                    Source="fishkey_logo_obrys.png"
                    HeightRequest="200"
                    HorizontalOptions="Center" />
             <VerticalStackLayout
+                Grid.Row="3"
+                Grid.RowSpan="2"
                 Spacing="15"
                 Padding="10,0"
-                VerticalOptions="End">
+                VerticalOptions="Start">
                 <Label Text="FishKey App"
                        TextColor="White"
                        FontFamily="RobotoBold"
@@ -49,6 +59,7 @@
                     Opacity="1"
                     FontFamily="RobotoRegular"
                     FontSize="Small"
+                    TextColor="White"
                     SemanticProperties.Hint="Enters Create User Page"
                     Command="{Binding GoToCreateUserPageCommand}"
                     WidthRequest="150"
@@ -56,7 +67,7 @@
                     BackgroundColor="Transparent"
                     BorderColor="White"
                     BorderWidth="1"
-                    CornerRadius="30"
+                    CornerRadius="15"
                     HeightRequest="30"
                     Padding="0"
                     Margin="0"/>
@@ -65,15 +76,16 @@
                         Opacity="1"
                         FontFamily="RobotoRegular"
                         FontSize="Small"
+                        TextColor="White"
                         SemanticProperties.Hint="Enters Select User Page"
                         Command="{Binding GoToSelectUserPageCommand}"
                         WidthRequest="150"
                         HorizontalOptions="Center"
-                        Margin="0,0,0,150"
+                        Margin="0,0,0,10"
                         BackgroundColor="Transparent"
                         BorderColor="White"
                         BorderWidth="1"
-                        CornerRadius="30"
+                        CornerRadius="15"
                         HeightRequest="30"
                         Padding="0" />
             </VerticalStackLayout>

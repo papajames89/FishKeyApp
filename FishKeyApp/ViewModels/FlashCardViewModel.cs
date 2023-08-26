@@ -82,7 +82,7 @@ namespace FishKeyApp.ViewModels
                 Locale = _polishLocale
             };
 
-            await TextToSpeech.SpeakAsync(CardLabel, settings);
+            await TextToSpeech.Default.SpeakAsync(CardLabel, settings);
         }
 
         [RelayCommand]
@@ -155,7 +155,7 @@ namespace FishKeyApp.ViewModels
         {
             var locales = await TextToSpeech.GetLocalesAsync();
 
-            _polishLocale = locales.Where(x => x.Language == "pl").First();
+            _polishLocale = locales.Where(x => x.Language == "pl-PL").First();
         }
 
         [ObservableProperty]

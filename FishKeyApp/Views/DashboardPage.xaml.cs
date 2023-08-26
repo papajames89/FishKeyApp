@@ -1,5 +1,4 @@
 ﻿using FishKeyApp.ViewModels;
-using Java.Lang;
 
 namespace FishKeyApp.Views
 {

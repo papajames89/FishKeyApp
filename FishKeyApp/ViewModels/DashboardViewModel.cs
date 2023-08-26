@@ -84,22 +84,50 @@ namespace FishKeyApp.ViewModels
         [RelayCommand]
         public async Task ResetCategory(string category)
         {
-            await _cardCategoryController.ResetCategoryProgress(user, category);
+            string cat = GetPolisPageName(category);
+            await _cardCategoryController.ResetCategoryProgress(user, cat);
             await InitAsync();
         }
 
         [RelayCommand]
         public Task GoToFlashCardPage(string category)
         {
+            string cat = GetPolisPageName(category);
             _currentContextModel.Name = user;
             _currentContextModel.Category = category;
-            return Shell.Current.GoToAsync($"{nameof(FlashCardPage)}?Category={category}",
+            return Shell.Current.GoToAsync($"{nameof(FlashCardPage)}?Category={cat}",
                 new Dictionary<string, object>
                 {
                     ["CurrentContext"] = _currentContextModel
                 });
         }
 
+        private string GetPolisPageName(string category)
+        {
+            string kategoria = "";
+            if (category != "A1" && category != "A2" && category != "B1" && category != "B2")
+            {
+                switch (category)
+                {
+                    case "At the airport":
+                        kategoria = "Na lotnisku";
+                        break;
+                    case "Body parts":
+                        kategoria = "Czesci ciala";
+                        break;
+                    case "Food and drinks":
+                        kategoria = "Jedzenie i picie";
+                        break;
+                    case "Test category":
+                        kategoria = "Kategoria testowa";
+                        break;
+                }
+
+                return kategoria;
+            }
+            return category;
+        }
+        
         [ObservableProperty]
         string user;
 

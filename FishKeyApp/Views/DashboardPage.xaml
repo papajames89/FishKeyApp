@@ -7,55 +7,49 @@
              x:Class="FishKeyApp.Views.DashboardPage"
              Shell.NavBarIsVisible="False"
              x:Name="Page"
-             Appearing="Page_Appearing">
+             Appearing="Page_Appearing"
+             BackgroundColor="White">
 
-    <Grid Margin="0,50,0,0">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*" />
-            <ColumnDefinition Width="6*" />
-            <ColumnDefinition Width="1*" />
-        </Grid.ColumnDefinitions>
-        <VerticalStackLayout>
-            <ImageButton Source="chevron_left.png"
-                         MaximumHeightRequest="30"
-                         Grid.Column="0"
-                         Margin="20,35,0,0"
-                         Opacity="0.5"
-                         Command="{Binding LogOutCommand}" />
-        </VerticalStackLayout>
-
-        <VerticalStackLayout HorizontalOptions="Center"
-                             VerticalOptions="Start"
-                             Grid.Column="1">
-            <Image Source="fishkey_logo.png"
-                   MaximumHeightRequest="100" />
-            <Label Text="{Binding PageHeader}"
-                   HorizontalOptions="Center"
-                   TextColor="Black"
-                   Opacity="0.9"
-                   FontSize="30"
-                   Padding="0"
-                   Margin="0,40,0,20"
-                   FontFamily="RobotoBold" />
-
+    <Grid Margin="0,50,0,0"
+          ColumnDefinitions="1*,6*,1*"
+          RowDefinitions="7*,15*,4*">
+        
+        <VerticalStackLayout
+           HorizontalOptions="Center"
+           VerticalOptions="Start"
+           Grid.Column="1"
+           Grid.Row="0">
+           <Image Source="fishkey_logo.png"
+                  MaximumHeightRequest="100" />
+           
+           <Label Text="{Binding PageHeader}"
+                  HorizontalOptions="Center"
+                  TextColor="Black"
+                  Opacity="0.9"
+                  FontSize="30"
+                  Padding="0"
+                  Margin="0,40,0,20"
+                  FontFamily="RobotoBold" />
+       </VerticalStackLayout>
+        
+        <Grid
+            Grid.Row="1"
+            Grid.ColumnSpan="3"
+            Margin="0,0,0,20">
+            
             <CollectionView x:Name="UsersList"
                             ItemsSource="{Binding Categories}">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Padding="0,10,0,10">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*" />
-                                <ColumnDefinition Width="5*" />
-                                <ColumnDefinition Width="*" />
-                            </Grid.ColumnDefinitions>
+                        <Grid Padding="0,10,0,10"
+                              ColumnDefinitions="1*,1*,4*,1*,1*">
 
-                            <Button Grid.Column="1"
+                            <Button Grid.Column="2"
                                     Text="{Binding CategoryName}"
                                     FontFamily="RobotoLight"
                                     FontSize="14"
                                     TextColor="Grey"
                                     CornerRadius="15"
-                                    WidthRequest="200"
                                     HeightRequest="30"
                                     Padding="0"
                                     BackgroundColor="White"
@@ -63,13 +57,12 @@
                                     Command="{Binding Source={x:Reference Page}, Path=BindingContext.GoToFlashCardPageCommand}">
                                 <Button.Shadow>
                                     <Shadow Brush="Black"
-                                            Offset="5,5"
-                                            Radius="10"
+                                            Offset="2,4"
+                                            Radius="5"
                                             Opacity="0.2" />
                                 </Button.Shadow>
                             </Button>
-                            <ImageButton Grid.Column="2"
-                                         HorizontalOptions="End"
+                            <ImageButton Grid.Column="3"
                                          Padding="0"
                                          Source="delete_button.png"
                                          MaximumHeightRequest="30"
@@ -77,53 +70,60 @@
                                          Command="{Binding Source={x:Reference Page}, Path=BindingContext.ResetCategoryCommand}">
                                 <ImageButton.Shadow>
                                     <Shadow Brush="Black"
-                                            Offset="5,5"
-                                            Radius="10"
+                                            Offset="2,4"
+                                            Radius="5"
                                             Opacity="0.2" />
                                 </ImageButton.Shadow>
                             </ImageButton>
-                            <AbsoluteLayout>
+                            
+                            <AbsoluteLayout
+                                Grid.Column="1"
+                                BackgroundColor="Transparent"
+                                WidthRequest="50"
+                                HeightRequest="30">
                                 <maui:RadialDial x:Name="RadialControlControl"
-                                                 AbsoluteLayout.LayoutFlags="All, All, All, All"
-                                                 AbsoluteLayout.LayoutBounds="0.43, .5, .3, .3"
-                                                 Grid.Column="0"
+                                                 AbsoluteLayout.LayoutFlags="PositionProportional"
+                                                 AbsoluteLayout.LayoutBounds=".5, .5, 75, 75"
                                                  DialWidth="8"
-                                                 VerticalOptions="Center"
-                                                 WidthRequest="70"
-                                                 HeightRequest="70"
-                                                 TouchInputEnabled="True"
+                                                 TouchInputEnabled="False"
                                                  DialColor="Orange"
                                                  BaseColor="LightSkyBlue"
                                                  Min="0"
                                                  Max="100"
                                                  Value="{Binding ProgressValue}"
                                                  ShowScale="False"
-                                                 InternalPadding="10"
+                                                 InternalPadding="0"
                                                  ScaleDistance="10"
                                                  ScaleLength="24"
                                                  ScaleThickness="8"
                                                  ScaleUnits="5"
                                                  IgnorePixelScaling="False">
                                 </maui:RadialDial>
-                                <Label Grid.Column="0"
-                                       HorizontalOptions="Center"
-                                       Margin="0,5,5,0"
+                                <Label
                                        AbsoluteLayout.LayoutFlags="PositionProportional"
-                                       AbsoluteLayout.LayoutBounds=".5, .5, 50, 30"
-                                       Text="{Binding ProgressValue}" />
+                                       AbsoluteLayout.LayoutBounds=".5, .5"
+                                       Text="{Binding ProgressValue}"
+                                       TextColor="Grey"/>
                             </AbsoluteLayout>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="{Binding Subtitle}"
-                   HorizontalOptions="Center"
-                   TextColor="Black"
-                   Opacity="0.6"
-                   FontSize="14"
-                   MaximumWidthRequest="250"
-                   Margin="0,30,0,30"
-                   FontFamily="RobotoRegular" />
-        </VerticalStackLayout>
+            
+        </Grid>
+        
+        <Label 
+            Grid.Row="2"
+            Grid.Column="1"
+            Text="{Binding Subtitle}"
+            HorizontalOptions="Center"
+            TextColor="Black"
+            HorizontalTextAlignment="Center"
+            Opacity="0.6"
+            FontSize="14"
+            MaximumWidthRequest="250"
+            Margin="0,30,0,30"
+            FontFamily="RobotoRegular" />
+        
     </Grid>
 </ContentPage>
