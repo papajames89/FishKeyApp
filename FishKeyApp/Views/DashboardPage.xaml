@@ -12,7 +12,7 @@
 
     <Grid Margin="0,50,0,0"
           ColumnDefinitions="1*,6*,1*"
-          RowDefinitions="7*,15*,4*">
+          RowDefinitions="7*,16*,3*">
         
         <VerticalStackLayout
            HorizontalOptions="Center"
@@ -24,18 +24,18 @@
            
            <Label Text="{Binding PageHeader}"
                   HorizontalOptions="Center"
+                  VerticalOptions="End"
                   TextColor="Black"
                   Opacity="0.9"
                   FontSize="30"
                   Padding="0"
-                  Margin="0,40,0,20"
+                  Margin="0,0,0,20"
                   FontFamily="RobotoBold" />
        </VerticalStackLayout>
         
         <Grid
             Grid.Row="1"
-            Grid.ColumnSpan="3"
-            Margin="0,0,0,20">
+            Grid.ColumnSpan="3">
             
             <CollectionView x:Name="UsersList"
                             ItemsSource="{Binding Categories}">
@@ -83,7 +83,7 @@
                                 HeightRequest="30">
                                 <maui:RadialDial x:Name="RadialControlControl"
                                                  AbsoluteLayout.LayoutFlags="PositionProportional"
-                                                 AbsoluteLayout.LayoutBounds=".5, .5, 75, 75"
+                                                 AbsoluteLayout.LayoutBounds=".5, .5, 60, 60"
                                                  DialWidth="8"
                                                  TouchInputEnabled="False"
                                                  DialColor="Orange"
@@ -117,12 +117,12 @@
             Grid.Column="1"
             Text="{Binding Subtitle}"
             HorizontalOptions="Center"
+            VerticalOptions="Start"
             TextColor="Black"
             HorizontalTextAlignment="Center"
             Opacity="0.6"
             FontSize="14"
             MaximumWidthRequest="250"
-            Margin="0,30,0,30"
             FontFamily="RobotoRegular" />
         
     </Grid>
